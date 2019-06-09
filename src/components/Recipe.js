@@ -9,6 +9,7 @@ export default class Recipe extends Component {
             publisher,
             recipe_id
         }  = this.props.recipe
+    const { handleDetails } = this.props;
         return (
            <React.Fragment>
             <div className="col-10 mx-auto col-md-6 col-lg-4 my-3">
@@ -24,6 +25,7 @@ export default class Recipe extends Component {
                     <div className="card-footer">
                         <button type="button"
                         className="btn btn-info"
+                        onClick = {handleDetails}
                         >View Recipe </button>
                         <a href={source_url}
                         className="btn btn-danger mx-2"
