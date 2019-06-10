@@ -4,7 +4,7 @@ import {recipes} from './tempList'
 import RecipeList from './components/RecipeList'
 import RecipeDetails from './components/RecipeDetails';
 
-const API_KEY = "e28df0b631494c1f32eae11c51a7d6de"
+const API_KEY = "615aad7945230fa0f3d0fff650c3561a"
 
 export default class App extends Component {
   state = {
@@ -14,7 +14,7 @@ export default class App extends Component {
     details_id : 35380,
     pageIndex: 1,
     search : '',
-    query: '&q='    
+    query: '&q='
 }
 
 async getRecipes(){

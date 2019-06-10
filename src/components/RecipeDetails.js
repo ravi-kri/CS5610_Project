@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {recipe} from "../tempDetails"
 
-const API_KEY = "e28df0b631494c1f32eae11c51a7d6de"
+const API_KEY = "615aad7945230fa0f3d0fff650c3561a"
 
 export default class RecipeDetails extends Component {
     constructor(props){
@@ -26,7 +26,7 @@ console.log(error);
 }
 
     render() {
-        const{image_url,title,ingredients} = this.state.recipe;
+        const{image_url,publisher,publisher_url,source_url,title,ingredients} = this.state.recipe;
         const {handleIndex} = this.props
         return (
             <React.Fragment>
@@ -43,7 +43,13 @@ console.log(error);
                     </div>
                     <div className="col-10 mx-auto col-md-6 my-3">
                     <h6>{title}</h6>
-                   
+                    <h6 className="text-warning text-styling">{publisher}</h6>
+                    <a href={publisher_url}
+                    target="_blank"
+                    className="btn btn-primary mt-2">Link to the Publisher</a>
+                    <a href={source_url}
+                    target="_blank"
+                    className="btn btn-success mt-2 mx-3">View Source</a>
                     <ul className="list-group mt-4">
                         <h2 className="mt-3 mb-4">Ingredients</h2>
                         {
