@@ -5,7 +5,6 @@ export default class Recipe extends Component {
         const {
             image_url,
             title,
-            source_url,
             publisher,
             recipe_id
         }  = this.props.recipe
@@ -27,11 +26,6 @@ export default class Recipe extends Component {
                         className="btn btn-info"
                         onClick = {() => handleDetails(0,recipe_id)}
                         >View Recipe </button>
-                        <a href={source_url}
-                        className="btn btn-danger mx-2"
-                        target="_blank">
-                            View Source
-                        </a>
                     </div>
                 </div>
             </div>

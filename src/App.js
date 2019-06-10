@@ -4,13 +4,14 @@ import {recipes} from './tempList'
 import RecipeList from './components/RecipeList'
 import RecipeDetails from './components/RecipeDetails';
 
+const API_KEY = "e28df0b631494c1f32eae11c51a7d6de"
 
 export default class App extends Component {
   state = {
     recipes: [],
-    url: "https://www.food2fork.com/api/search?key=9f7021171e95181c6daa2f6147d81c72",
-    base_url: "https://www.food2fork.com/api/search?key=9f7021171e95181c6daa2f6147d81c72", 
-    details_id : 35389,
+    url: `https://www.food2fork.com/api/search?key=${API_KEY}`,
+    base_url: `https://www.food2fork.com/api/search?key=${API_KEY}`, 
+    details_id : 35380,
     pageIndex: 1,
     search : '',
     query: '&q='    
