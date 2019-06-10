@@ -6,7 +6,7 @@ export default class RecipeDetails extends Component {
         super(props)
         this.state={
             recipe:recipe,
-            url:`https://www.food2fork.com/api/get?key=23454f794798f76a98ea86aaac2d2b72&rId=${this.props.id}`
+            url:`https://www.food2fork.com/api/get?key=9f7021171e95181c6daa2f6147d81c72&rId=${this.props.id}`
         }
     } 
 

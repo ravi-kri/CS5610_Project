@@ -25,7 +25,7 @@ export default class Recipe extends Component {
                     <div className="card-footer">
                         <button type="button"
                         className="btn btn-info"
-                        onClick = {handleDetails}
+                        onClick = {() => handleDetails(0,recipe_id)}
                         >View Recipe </button>
                         <a href={source_url}
                         className="btn btn-danger mx-2"
