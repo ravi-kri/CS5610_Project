@@ -1,0 +1,37 @@
+<% include ../styling/header %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container" id="searchdesc">
+            <h1 id="greeting"><span class="glyphicon glyphicon-grain align-bottom" aria-hidden="true"></span> Recipe
+                Center</h1>
+            <div>
+                <p>View the best recipes on Recipe Center</p>
+                <form class="form-inline" action="/recipes" method="GET">
+                    <div class="form-group has-feedback">
+                        <label for="search"></label>
+                        <input class="form-control" type="text" name="search" placeholder="Search recipes"
+                               autocomplete="off"/>
+                        <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% recipes.forEach(function(recipe){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>"></a>
+                    <div class="caption">
+                        <h4> <%= recipe.name %> </h4>
+                        <h5><%= recipe.location %></h5>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<% include ../styling/footer %>
