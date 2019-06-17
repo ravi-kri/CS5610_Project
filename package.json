@@ -1,31 +1,19 @@
 {
-  "name": "recipes",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
-  },
+  "name": "recipe_center",
+  "version": "1.0.0",
+  "description": "Find and Create Recipes",
+  "main": "app.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravi-kri/CS5610_Project.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "author": "Ravi and Harsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ravi-kri/CS5610_Project/issues"
+  },
+  "homepage": "https://github.com/ravi-kri/CS5610_Project#readme"
 }
