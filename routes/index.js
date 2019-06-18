@@ -123,4 +123,52 @@ router.get("/logout", function (req, res) {
     res.redirect("/");
 });
 
+
+//New bookmark, POST
+router.post("/bookmarked", isLoggedIn, function (req, res) {
+    console.log(req)
+    Recipe.findById(req.body.idofrecipe, function (err, recipe) {
+        if (err) {
+            console.log(err);
+            res.redirect("/recipes");
+        } else {
+                console.log(recipe)
+        User.find(req.user._id, function (err, user) {
+                console.log(user[0])
+                var newuser = user[0]
+                console.log(newuser.recipesBookmarked)
+                newuser.recipesBookmarked.push(recipe)
+                console.log(newuser)
+                newuser.save()
+                req.flash("success", "Successfully added bookmark!");
+                res.redirect("/recipes/"+ recipe._id);
+                
+            });
+        }
+
+    });
+});
+
+//New bookmark, POST
+router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
+        User.find(req.user._id, function (err, user) {
+                console.log(user[0])
+                var newuser = user[0]
+                console.log(newuser.recipesBookmarkedapi)
+                newuser.recipesBookmarkedapi.push(req.body.idofrecipe)
+                console.log(newuser)
+                newuser.save()
+                req.flash("success", "Successfully added bookmark!");
+                res.redirect("/recipes");
+});
+});
+
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	req.flash("error", "You need to be logged in to do that!");
+	res.redirect("/login");
+}
+
 module.exports = router;

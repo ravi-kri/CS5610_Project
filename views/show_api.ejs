@@ -6,12 +6,17 @@
 		<div class="thumbnail">
 			<img class="img-responsive" src="<%= noMatch.image_url %>">
 			<div class="caption-full">
+					<form action="/bookmarkedapi" method="POST">
 				<h4><a><%= noMatch.title %></a></h4>
 				<a><%= noMatch.source_url %></a>
 				<p>
 					<em>Submitted by : <%= noMatch.publisher_url %></em>
 				</p>
-				<button class="btn btn-danger">Bookmark it!</button>
+				<button class="btn btn-default btn-sm">
+						<span class="glyphicon glyphicon-bookmark"></span> Bookmark
+					  </button>
+					  <input type="text" hidden name="idofrecipe" value="<%= noMatch.recipe_id%>" >
+					</form>
 			</div>
 		</div>
 	</div>
