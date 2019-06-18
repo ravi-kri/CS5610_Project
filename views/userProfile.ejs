@@ -13,31 +13,32 @@
         </div>
 
         <div class="col-md-9">
-            <p class="lead">Recipes you've added so far:</p>
-            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-                <% recipes.forEach(function(recipe){ %>
-
-                    <div class="col-md-3 col-sm-6">
-                        <div class="thumbnail">
-                            <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
-                                <div class="profilethumbnail" class="caption">
-                                    <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
-                                    <h5 class="profilethumbnail"><%= recipe.location %></h5>
-                                    <div class="form-group">
-                                        <a href="/recipes/<%= recipe._id %>/edit">
-                                            <button class="btn btn-warning ">Edit</button>
-                                        </a>
-                                        <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE"
-                                              method="POST">
-                                            <button class="btn btn-danger ">Delete</button>
-                                        </form>
+            <% if(currentUser.type == "chef"){ %>
+                <p class="lead">Recipes you've added so far:</p>
+                <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+                    <% recipes.forEach(function(recipe){ %>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="thumbnail">
+                                <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
+                                    <div class="profilethumbnail" class="caption">
+                                        <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
+                                        <h5 class="profilethumbnail"><%= recipe.location %></h5>
+                                        <div class="form-group">
+                                            <a href="/recipes/<%= recipe._id %>/edit">
+                                                <button class="btn btn-warning ">Edit</button>
+                                            </a>
+                                            <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE"
+                                                  method="POST">
+                                                <button class="btn btn-danger ">Delete</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                <% }); %>
-            </div>
+                    <% }); %>
+                </div>
+            <% } %>
         </div>
 
         <div>
