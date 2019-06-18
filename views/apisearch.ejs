@@ -6,7 +6,7 @@
                         Center</h1>
                     <div>
                         <p>View the best recipes on Recipe Center</p>
-                        
+                        <p>Recipes from people around the world</p>
                             <div class="form-group has-feedback">
                                 <label for="search"></label>
                                 <form method="POST" action="/api/search">
@@ -16,14 +16,13 @@
                                 <button class="btn btn-danger">Search</button>
                               </form>
                             </div>
-                     
                     </div>
                 </div>
             </header>
                
        
    
-
+    <% if(typeof noMatch != 'undefined'){ %>
     <div class="container my-5">
       <div class="row text-center" style="display:flex; flex-wrap: wrap;">
                 <% noMatch.forEach(function(recipe){ %>
@@ -43,11 +42,6 @@
             <% }) %>
         </div>
         </div>
+        <% } %>
     </div>
-
-                 
-      
-   
 </div>
-
-<!-- 082c86103b169fdd1178506d4705b78e -->

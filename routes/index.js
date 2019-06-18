@@ -68,7 +68,7 @@ router.get("/login", function (req, res) {
 
 // Login, GET & POST
 router.get("/api", function (req, res) {
-    res.render("api")
+    res.render("apisearch")
 });
 
 
