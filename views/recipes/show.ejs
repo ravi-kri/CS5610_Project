@@ -6,12 +6,18 @@
 		<div class="thumbnail">
 			<img class="img-responsive" src="<%= recipe.image %>">
 			<div class="caption-full">
+			
+			<form action="/bookmarked" method="POST">
 				<h4><a><%= recipe.name %></a></h4>
 				<p><%= recipe.description %></p>
 				<p>
 					<em>Submitted by : <%= recipe.author.username%></em>
 				</p>
-				<button class="btn btn-danger">Bookmark it!</button>
+				<button class="btn btn-default btn-sm">
+						<span class="glyphicon glyphicon-bookmark"></span> Bookmark
+					  </button>
+				<input type="text" hidden name="idofrecipe" value="<%= recipe._id%>" >
+			</form>
 			</div>
 		</div>
 		<div class="well">

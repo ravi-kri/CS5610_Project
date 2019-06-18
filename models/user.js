@@ -9,7 +9,16 @@ var UserSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     username: String,
-    password: String
+    password: String,
+    recipesBookmarked: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "recipe"
+        }
+    ],
+    recipesBookmarkedapi: [ {
+        type: String
+    }]
 });
 
 UserSchema.plugin(passportLocalMongoose);
