@@ -14,7 +14,7 @@ router.get("/", function (req, res) {
                 console.log(err);
             } else {
                 if (allRecipes.length < 1) {
-                    noMatch = "No campgrounds found, please try again.";
+                    noMatch = "No recipes found, please try again.";
                 }
                 res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
             }
@@ -41,6 +41,23 @@ router.post("/api/search", function (req, res) {
         noMatch = json['recipes'];
         console.log(noMatch);
         res.render("apisearch", {noMatch: noMatch})
+    });
+});
+
+router.post("/api/search/id", function (req, res) {
+    console.log("hmmm1111");
+    url = "https://www.food2fork.com/api/get?key=082c86103b169fdd1178506d4705b78e&rId=" + req.body.recipeid;
+    console.log(url);
+    request({url, json: true}, function (err, reso, json) {
+        if (err) {
+            throw err;
+        }
+        noMatch = json['recipe'];
+        // title = json['title'];
+        // source = json['source_url'];
+        // publisher = json['publisher_url'];
+        console.log(noMatch);
+        res.render("show_api", {noMatch: noMatch})
     });
 });
 

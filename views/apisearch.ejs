@@ -91,7 +91,10 @@
                     <div class="caption">
                         <h4> <%= recipe.name %> </h4>
                         <h3>Submitted by : <%= recipe.publisher %></h3>
+                        <form  action="/api/search/id" method="POST">
                         <h5><button class="btn btn-info">View Recipe</button></h5>
+                        <input type="hidden" name="recipeid" value="<%= recipe.recipe_id %>">  
+                        </form>
                     </div>
                 </div>
             </div>
