@@ -1,0 +1,30 @@
+<% include ../styling/header %>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Edit your Profile</h1>
+        <div style="width:30%; margin: 30px auto;">
+            <form action="/user/<%= user._id %>" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="user[firstName]" value="<%= user.firstName %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="user[lastName]" value="<%= user.lastName %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="user[email]" value="<%= user.email %>">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" disabled="disabled" type="text" name="user[username]"
+                           value="<%= user.username %>">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<% include ../styling/footer %>
