@@ -30,19 +30,19 @@ router.get("/", function (req, res) {
     }
 });
 
-router.post("/api/search", function (req, res) {
-    url = "https://www.food2fork.com/api/search?key=082c86103b169fdd1178506d4705b78e&q=" + req.body.search;
+router.get("/search", function (req, res) {
+    url = "https://www.food2fork.com/api/search?key=082c86103b169fdd1178506d4705b78e&q=" + req.query.recipe;
     request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
         }
         noMatch = json['recipes'];
-        res.render("apisearch", {noMatch: noMatch})
+        res.render("search", {noMatch: noMatch})
     });
 });
 
-router.post("/api/search/id", function (req, res) {
-    url = "https://www.food2fork.com/api/get?key=082c86103b169fdd1178506d4705b78e&rId=" + req.body.recipeid;
+router.get("/details", function (req, res) {
+    url = "https://www.food2fork.com/api/get?key=082c86103b169fdd1178506d4705b78e&rId=" + req.query.recipe_id;
     request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
@@ -51,7 +51,7 @@ router.post("/api/search/id", function (req, res) {
         // title = json['title'];
         // source = json['source_url'];
         // publisher = json['publisher_url'];
-        res.render("show_api", {noMatch: noMatch})
+        res.render("details", {noMatch: noMatch})
     });
 });
 
@@ -61,8 +61,8 @@ router.get("/login", function (req, res) {
 });
 
 // Login, GET & POST
-router.get("/api", function (req, res) {
-    res.render("apisearch")
+router.get("/search", function (req, res) {
+    res.render("search")
 });
 
 
