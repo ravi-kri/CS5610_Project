@@ -19,7 +19,6 @@ router.get("/:id", isLoggedIn, function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            console.log(User.find({}));
             Recipe.find({}, function (err, everyRecipe) {
                 if (err) {
                     console.log(err);
@@ -42,7 +41,6 @@ router.get("/:id", isLoggedIn, function (req, res) {
 
 //Updating a Comment
 router.put("/:id", isLoggedIn, function (req, res) {
-    console.log(req);
     User.findByIdAndUpdate(req.params.id, req.body.user, function (err, updatedUser) {
         if (err) {
             res.redirect("back");

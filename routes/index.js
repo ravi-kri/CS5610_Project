@@ -31,23 +31,18 @@ router.get("/", function (req, res) {
 });
 
 router.post("/api/search", function (req, res) {
-    console.log("hmmm");
     url = "https://www.food2fork.com/api/search?key=082c86103b169fdd1178506d4705b78e&q=" + req.body.search;
-    console.log(url);
     request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
         }
         noMatch = json['recipes'];
-        console.log(noMatch);
         res.render("apisearch", {noMatch: noMatch})
     });
 });
 
 router.post("/api/search/id", function (req, res) {
-    console.log("hmmm1111");
     url = "https://www.food2fork.com/api/get?key=082c86103b169fdd1178506d4705b78e&rId=" + req.body.recipeid;
-    console.log(url);
     request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
@@ -56,7 +51,6 @@ router.post("/api/search/id", function (req, res) {
         // title = json['title'];
         // source = json['source_url'];
         // publisher = json['publisher_url'];
-        console.log(noMatch);
         res.render("show_api", {noMatch: noMatch})
     });
 });
@@ -104,7 +98,13 @@ router.post("/register", function (req, res) {
     var lastname = req.body.lastName;
     var email = req.body.email;
     var type = req.body.type;
-    var newUser = new User({firstName: firstname, lastName: lastname, email: email, type:type, username: req.body.username});
+    var newUser = new User({
+        firstName: firstname,
+        lastName: lastname,
+        email: email,
+        type: type,
+        username: req.body.username
+    });
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
             req.flash("error", err.message);
@@ -126,23 +126,18 @@ router.get("/logout", function (req, res) {
 
 //New bookmark, POST
 router.post("/bookmarked", isLoggedIn, function (req, res) {
-    console.log(req)
     Recipe.findById(req.body.idofrecipe, function (err, recipe) {
         if (err) {
             console.log(err);
             res.redirect("/recipes");
         } else {
-                console.log(recipe)
-        User.find(req.user._id, function (err, user) {
-                console.log(user[0])
-                var newuser = user[0]
-                console.log(newuser.recipesBookmarked)
-                newuser.recipesBookmarked.push(recipe)
-                console.log(newuser)
-                newuser.save()
+            User.find(req.user._id, function (err, user) {
+                var newuser = user[0];
+                newuser.recipesBookmarked.push(recipe);
+                newuser.save();
                 req.flash("success", "Successfully added bookmark!");
-                res.redirect("/recipes/"+ recipe._id);
-                
+                res.redirect("/recipes/" + recipe._id);
+
             });
         }
 
@@ -151,24 +146,21 @@ router.post("/bookmarked", isLoggedIn, function (req, res) {
 
 //New bookmark, POST
 router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
-        User.find(req.user._id, function (err, user) {
-                console.log(user[0])
-                var newuser = user[0]
-                console.log(newuser.recipesBookmarkedapi)
-                newuser.recipesBookmarkedapi.push(req.body.idofrecipe)
-                console.log(newuser)
-                newuser.save()
-                req.flash("success", "Successfully added bookmark!");
-                res.redirect("/recipes");
-});
+    User.find(req.user._id, function (err, user) {
+        var newuser = user[0];
+        newuser.recipesBookmarkedapi.push(req.body.idofrecipe);
+        newuser.save();
+        req.flash("success", "Successfully added bookmark!");
+        res.redirect("/recipes");
+    });
 });
 
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next();
-	}
-	req.flash("error", "You need to be logged in to do that!");
-	res.redirect("/login");
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    req.flash("error", "You need to be logged in to do that!");
+    res.redirect("/login");
 }
 
 module.exports = router;
