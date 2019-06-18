@@ -26,7 +26,7 @@ cloudinary.config({
 router.get("/", function(req,res){
 	if (req.query.search){
 		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-		Recipe.find({location : regex}, function(err, allRecipes){
+		Recipe.find({name : regex}, function(err, allRecipes){
 			if (err){
 				console.log(err);
 			}
