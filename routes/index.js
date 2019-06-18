@@ -86,7 +86,8 @@ router.post("/register", function (req, res) {
     var firstname = req.body.firstName;
     var lastname = req.body.lastName;
     var email = req.body.email;
-    var newUser = new User({firstName: firstname, lastName: lastname, email: email, username: req.body.username});
+    var type = req.body.type;
+    var newUser = new User({firstName: firstname, lastName: lastname, email: email, type:type, username: req.body.username});
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
             req.flash("error", err.message);
@@ -102,7 +103,7 @@ router.post("/register", function (req, res) {
 router.get("/logout", function (req, res) {
     req.logout();
     req.flash("success", "Successfully logged out!");
-    res.redirect("/recipes");
+    res.redirect("/");
 });
 
 module.exports = router;

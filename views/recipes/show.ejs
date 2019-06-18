@@ -2,42 +2,16 @@
 
 <div class="container">
 	<div class="row">
-		<!-- <div class="col-md-3">
-			<p class="lead">Map :</p>
-			<iframe
-			width="100%"
-			height="450"
-			frameborder="0" style="border:0"
-			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA7JL82LCdjSY8v2ljX3WkMFjQyEzqwN1Y&q=<%= recipe.location %>" allowfullscreen>
-		</iframe>
-	</div> -->
 	<div class="col-md-9">
 		<div class="thumbnail">
 			<img class="img-responsive" src="<%= recipe.image %>">
 			<div class="caption-full">
 				<h4><a><%= recipe.name %></a></h4>
-				<h5><%= recipe.location %></h5>
 				<p><%= recipe.description %></p>
-
-
-
-				<p>Features</p>
-				<ul>
-                    <% recipe.features.forEach(function(feature){ %>
-					<li><%= feature %></li>
-                    <% }); %>
-				</ul>
-				<p>Activities</p>
-				<ul>
-                    <% recipe.activities.forEach(function(activity){ %>
-					<li><%= activity %></li>
-                    <% }); %>
-				</ul>
-
-				
 				<p>
 					<em>Submitted by : <%= recipe.author.username%></em>
 				</p>
+				<button class="btn btn-danger">Bookmark it!</button>
 			</div>
 		</div>
 		<div class="well">

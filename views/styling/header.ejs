@@ -24,6 +24,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <% if(!currentUser){ %>
                     <li><a href="/api">API Recipes</a></li>
+                    <% var chef = "chef" %>
                     <li><a href="/recipes/add"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add a Recipe</a>
                     </li>
                     <li><a href="/login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i> Login</a></li>
@@ -31,10 +32,11 @@
                 <% } else { %>
                     <li><a href="/api">API Recipes</a></li>
                     <li><a href="/user/<%= currentUser._id %>"><i class="glyphicon glyphicon-leaf"
-                                                                  aria-hidden="true"></i> Signed-in
-                            as <%= currentUser.username %></a></li>
+                                                                  aria-hidden="true"></i> Profile</a></li>
+                            <% if(currentUser.type == "chef"){ %>
                     <li><a href="/recipes/add"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add a Recipe</a>
                     </li>
+                    <% } else {} %>
                     <li><a href="/logout"><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i> Logout</a></li>
                 <% } %>
             </ul>
@@ -43,7 +45,7 @@
 </nav>
 
 <div class="container">
-
+  
     <% if(error && error.length > 0){ %>
         <div class="alert alert-danger" role="alert">
             <%= error %>
