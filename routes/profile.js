@@ -1,11 +1,10 @@
 var express = require("express");
 var router = express.Router({mergeParams: true});
 var Recipe = require("../models/recipe");
-var User = require("../models/user");
-var request = require('request');
+var Profile = require("../models/user");
 
 router.get("/:id/edit", isLoggedIn, function (req, res) {
-    User.findById(req.params.id).exec(function (err, foundUser) {
+    Profile.findById(req.params.id).exec(function (err, foundUser) {
         if (err) {
             console.log(err);
         } else {
@@ -16,8 +15,8 @@ router.get("/:id/edit", isLoggedIn, function (req, res) {
 
 
 router.get("/:id", isLoggedIn, function (req, res) {
-    User.findById(req.params.id).exec(function (err, foundUser) {
-		 if (err) {
+    Profile.findById(req.params.id).exec(function (err, foundUser) {
+        if (err) {
             console.log(err);
         } else {
             Recipe.find({}, function (err, everyRecipe) {
@@ -49,12 +48,12 @@ router.get("/:id", isLoggedIn, function (req, res) {
 
 //Updating a Comment
 router.put("/:id", isLoggedIn, function (req, res) {
-    User.findByIdAndUpdate(req.params.id, req.body.user, function (err, updatedUser) {
+    Profile.findByIdAndUpdate(req.params.id, req.body.user, function (err, updatedUser) {
         if (err) {
             res.redirect("back");
         } else {
             req.flash("success", "Successfully Updated Profile!");
-            res.redirect("/user/" + req.params.id);
+            res.redirect("/profile/" + req.params.id);
         }
     });
 });
