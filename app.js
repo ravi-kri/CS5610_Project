@@ -17,7 +17,7 @@ app.locals.moment = moment;
 var commentRoutes = require("./routes/comments"),
     recipeRoutes = require("./routes/recipe"),
     indexRoutes = require("./routes/index"),
-    userProfileRoute = require("./routes/user");
+    userProfileRoute = require("./routes/profile");
 
 
 app.use(flash());
@@ -51,7 +51,7 @@ app.use(methodOverride("_method"));
 app.use(indexRoutes);
 app.use("/recipes", recipeRoutes);
 app.use("/recipes/:id/comments", commentRoutes);
-app.use("/user/", userProfileRoute);
+app.use("/profile/", userProfileRoute);
 
 app.listen(3000, function () {
     console.log("Server started!");

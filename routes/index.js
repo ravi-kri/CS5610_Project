@@ -67,7 +67,7 @@ router.get("/search", function (req, res) {
 
 
 router.post("/login", (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
+    passport.authenticate("local", (err, user) => {
         if (err) {
             return next(err);
         }

@@ -46,8 +46,8 @@
                     <li><a href="/register"><i class="glyphicon glyphicon-user" aria-hidden="true"></i> Sign Up</a></li>
                 <% } else { %>
                     <li><a href="/search">More recipes</a></li>
-                    <li><a href="/user/<%= currentUser._id %>"><i class="glyphicon glyphicon-leaf"
-                                                                  aria-hidden="true"></i> Profile</a></li>
+                    <li><a href="/profile/<%= currentUser._id %>"><i class="glyphicon glyphicon-leaf"
+                                                                     aria-hidden="true"></i> Profile</a></li>
                     <% if(currentUser.type == "chef"){ %>
                         <li><a href="/recipes/add"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add a
                                 Recipe</a>
