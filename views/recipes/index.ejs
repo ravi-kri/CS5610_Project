@@ -27,7 +27,7 @@
                         <h4> <%= recipe.name %> </h4>
                         
                         <h3>Submitted by : 
-                                <a href="/profile/other/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                                <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
                         </h3>
                         <% if(currentUser){ %>
                             <% if(currentUser.username == recipe.author.username){ %>

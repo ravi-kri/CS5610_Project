@@ -14,8 +14,9 @@ router.get("/:id/edit", isLoggedIn, function (req, res) {
 });
 
 
-router.get("/:id", isLoggedIn, function (req, res) {
-    Profile.findById(req.params.id).exec(function (err, foundUser) {
+router.get("/", isLoggedIn, function (req, res) {
+    Profile.findById(req.user._id).exec(function (err, foundUser) {
+        console.log(req.user)
         if (err) {
             console.log(err);
         } else {
@@ -47,41 +48,7 @@ router.get("/:id", isLoggedIn, function (req, res) {
         }})});
         
 
-router.get("/:id", isLoggedIn, function (req, res) {
-    Profile.findById(req.params.id).exec(function (err, foundUser) {
-        if (err) {
-            console.log(err);
-        } else {
-            Recipe.find({}, function (err, everyRecipe) {
-                if (err) {
-                    console.log(err);
-                } else {
-					// allRecipe = everyRecipe
-					Recipe.find().where("author.id").equals(foundUser._id).exec((err, userRecipes) => {
-						if (err) {
-							console.log(err);
-						} else {
-						Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
-    					.exec(function (err, bookmarkedRecipesforSending){
-							if(err){
-								return console.log(err);
-							} else {
-						res.render("userProfile", {recipes: userRecipes, user: foundUser, 
-							bookmarkedRecipesapiarray : foundUser.recipesBookmarkedapi,
-							bookmarkedRecipesforSending : bookmarkedRecipesforSending,
-							allRecipe: everyRecipe});
-						}
-					});
-                }
-
-			});
-        }
-    });
-        }})});
-
-
-
-router.get("/other/:id", function (req, res) {
+router.get("/:id", function (req, res) {
     
     Profile.findById(req.params.id).exec(function (err, foundUser) {
         if (err) {

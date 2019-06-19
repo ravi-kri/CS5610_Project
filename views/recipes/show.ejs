@@ -27,7 +27,7 @@
             <ul>
                     <% recipe.bookmarkedBy.forEach(function(user){ %>
                         <li><h4>
-            <a href="/profile/other/<%= user._id %>"><%= user.username %></a>            
+            <a href="/profile/<%= user._id %>"><%= user.username %></a>            
                         
                         </h4></li>
                         <% }); %>
