@@ -1,19 +1,17 @@
 <% include ./styling/header %>
 <div class="container">
-    <header class="jumbotron">
+    <header class="jumbotron" style="background-color:aliceblue">
         <div class="container" id="searchdesc">
-            <h1 id="greeting"><span class="glyphicon glyphicon-grain align-bottom" aria-hidden="true"></span> Recipe
+            <h1><span class="glyphicon glyphicon-apple align-bottom" aria-hidden="true"></span> Recipe
                 Center</h1>
             <div>
-                <p>View the best recipes on Recipe Center</p>
-                <p>Recipes from people around the world</p>
+                <p>View recipes from people around the world</p>
                 <div class="form-group has-feedback">
                     <label for="recipe"></label>
                     <form method="GET" action="/search">
-                        <input class="form-control" type="text" name="recipe" placeholder="Search recipes"
-                               autocomplete="off"/>
+                        <input class="form-control" type="text" name="recipe" placeholder="Search recipes">
                         <br>
-                        <button class="btn btn-danger">Search</button>
+                        <button class="btn btn-ptimary">Search</button>
                     </form>
                 </div>
             </div>
@@ -26,8 +24,7 @@
                 <% noMatch.forEach(function(recipe){ %>
                     <div class="col-md-3 col-sm-6">
                         <div class="thumbnail">
-                            <a href="/recipes/<%= recipe._id %>"><img class="gridhome"
-                                                                      src="<%= recipe.image_url %>"></a>
+                            <img class="gridhome" src="<%= recipe.image_url %>">
                             <div class="caption">
                                 <h4> <%= recipe.title %> </h4>
                                 <h3>Submitted by : <%= recipe.publisher %></h3>

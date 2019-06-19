@@ -17,7 +17,11 @@ var UserSchema = new mongoose.Schema({
         }
     ],
     recipesBookmarkedapi: [ {
-        type: String
+        title: String,
+        source_url: String,
+        publisher_url: String,
+        recipe_id : String,
+        image_url: String
     }]
 });
 

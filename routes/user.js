@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router({mergeParams: true});
 var Recipe = require("../models/recipe");
 var User = require("../models/user");
+var request = require('request');
 
 router.get("/:id/edit", isLoggedIn, function (req, res) {
     User.findById(req.params.id).exec(function (err, foundUser) {
@@ -13,31 +14,38 @@ router.get("/:id/edit", isLoggedIn, function (req, res) {
     });
 });
 
+
 router.get("/:id", isLoggedIn, function (req, res) {
     User.findById(req.params.id).exec(function (err, foundUser) {
-        let allRecipe;
-        if (err) {
+		 if (err) {
             console.log(err);
         } else {
             Recipe.find({}, function (err, everyRecipe) {
                 if (err) {
                     console.log(err);
                 } else {
-                    allRecipe = everyRecipe
+					// allRecipe = everyRecipe
+					Recipe.find().where("author.id").equals(foundUser._id).exec((err, userRecipes) => {
+						if (err) {
+							console.log(err);
+						} else {
+						Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
+    					.exec(function (err, bookmarkedRecipesforSending){
+							if(err){
+								return console.log(err);
+							} else {
+						res.render("userProfile", {recipes: userRecipes, user: foundUser, 
+							bookmarkedRecipesapiarray : foundUser.recipesBookmarkedapi,
+							bookmarkedRecipesforSending : bookmarkedRecipesforSending,
+							allRecipe: everyRecipe});
+						}
+					});
                 }
 
-            });
-            Recipe.find().where("author.id").equals(foundUser._id).exec((err, userRecipes) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    res.render("userProfile", {recipes: userRecipes, user: foundUser, allRecipe: allRecipe});
-
-                }
-            });
+			});
         }
     });
-});
+		}})});
 
 //Updating a Comment
 router.put("/:id", isLoggedIn, function (req, res) {

@@ -4,7 +4,6 @@ body {
 
 
 #userGreeting {
-    font-family: 'Love Ya Like A Sister', cursive;
     text-align: center;
 
 }
@@ -18,9 +17,6 @@ body {
     display: inline;
 }
 
-#greeting {
-    font-family: 'Luckiest Guy', cursive;
-}
 
 .userprofile {
     font-family: 'Amatic SC', cursive;
@@ -48,3 +44,4 @@ h4 span {
     font-size: 20px;
     color: rgb(220, 20, 60);
 }
+

@@ -31,7 +31,7 @@ router.get("/", function (req, res) {
 });
 
 router.get("/search", function (req, res) {
-    url = "https://www.food2fork.com/api/search?key=082c86103b169fdd1178506d4705b78e&q=" + req.query.recipe;
+    url = "https://www.food2fork.com/api/search?key=78e22227df9ad4d0f6bf9d0b916d00df&q=" + req.query.recipe;
     request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
@@ -42,15 +42,12 @@ router.get("/search", function (req, res) {
 });
 
 router.get("/details", function (req, res) {
-    url = "https://www.food2fork.com/api/get?key=082c86103b169fdd1178506d4705b78e&rId=" + req.query.recipe_id;
+    url = "https://www.food2fork.com/api/get?key=78e22227df9ad4d0f6bf9d0b916d00df&rId=" + req.query.recipe_id;
     request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
         }
         noMatch = json['recipe'];
-        // title = json['title'];
-        // source = json['source_url'];
-        // publisher = json['publisher_url'];
         res.render("details", {noMatch: noMatch})
     });
 });
@@ -67,7 +64,7 @@ router.get("/search", function (req, res) {
 
 
 router.post("/login", (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
+    passport.authenticate("local", (err, user) => {
         if (err) {
             return next(err);
         }
@@ -81,7 +78,7 @@ router.post("/login", (req, res, next) => {
             }
             let redirectTo = req.session.redirectTo ? req.session.redirectTo : '/recipes';
             delete req.session.redirectTo;
-            req.flash("success", "Good to see you again, " + user.firstName);
+            req.flash("success", "Welcome " + user.firstName);
             res.redirect(redirectTo);
         });
     })(req, res, next);
@@ -148,7 +145,7 @@ router.post("/bookmarked", isLoggedIn, function (req, res) {
 router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
     User.find(req.user._id, function (err, user) {
         var newuser = user[0];
-        newuser.recipesBookmarkedapi.push(req.body.idofrecipe);
+        newuser.recipesBookmarkedapi.push(req.body);
         newuser.save();
         req.flash("success", "Successfully added bookmark!");
         res.redirect("/recipes");
