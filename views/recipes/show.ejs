@@ -15,7 +15,7 @@
                         </p>
                         <% if(currentUser){ %>
                             <% if(currentUser.username != recipe.author.username){ %>
-                        <button class="btn btn-default btn-sm">
+                        <button class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-bookmark"></span> Bookmark
                         </button>
                         <% }} %>
@@ -23,6 +23,12 @@
                     </form>
                 </div>
             </div>
+            <h3>Recipe Bookmarked by:-</h3>
+            <ul>
+                    <% recipe.bookmarkedBy.forEach(function(user){ %>
+                        <li><h4><%= user.username %></h4></li>
+                        <% }); %>
+            </ul>
         </div>
     </div>
 </div>

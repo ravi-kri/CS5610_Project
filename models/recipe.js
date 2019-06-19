@@ -13,7 +13,15 @@ var recipeSchema = new mongoose.Schema({
                     ref: "User"
                 },
             username: String
-        }
+        },
+    bookmarkedBy:[{
+        id:
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                },
+            username: String
+    }]
 });
 
 module.exports = mongoose.model("Recipe", recipeSchema);

@@ -156,6 +156,8 @@ router.post("/bookmarked", isLoggedIn, function (req, res) {
                 var newuser = user[0];
                 newuser.recipesBookmarked.push(recipe);
                 newuser.save();
+                recipe.bookmarkedBy.push(newuser)
+                recipe.save();
                 req.flash("success", "Successfully added bookmark!");
                 res.redirect("/recipes/" + recipe._id);
 
