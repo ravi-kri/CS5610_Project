@@ -16,7 +16,7 @@ var UserSchema = new mongoose.Schema({
             ref: "recipe"
         }
     ],
-    recipesBookmarkedapi: [ {
+    recipesBookmarkedapi: [{
         type: String
     }]
 });
