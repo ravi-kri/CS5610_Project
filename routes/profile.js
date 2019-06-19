@@ -46,7 +46,7 @@ router.get("/:id", isLoggedIn, function (req, res) {
     });
 		}})});
 
-//Updating a Comment
+//Updating a user
 router.put("/:id", isLoggedIn, function (req, res) {
     Profile.findByIdAndUpdate(req.params.id, req.body.user, function (err, updatedUser) {
         if (err) {

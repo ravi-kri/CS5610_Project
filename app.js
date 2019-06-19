@@ -8,14 +8,12 @@ var express = require("express"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
     Recipe = require("./models/recipe"),
-    Comment = require("./models/comment"),
     User = require("./models/user");
 
 
 app.locals.moment = moment;
 
-var commentRoutes = require("./routes/comments"),
-    recipeRoutes = require("./routes/recipe"),
+var  recipeRoutes = require("./routes/recipe"),
     indexRoutes = require("./routes/index"),
     userProfileRoute = require("./routes/profile");
 
@@ -50,7 +48,6 @@ app.use(methodOverride("_method"));
 
 app.use(indexRoutes);
 app.use("/recipes", recipeRoutes);
-app.use("/recipes/:id/comments", commentRoutes);
 app.use("/profile/", userProfileRoute);
 
 app.listen(3000, function () {
