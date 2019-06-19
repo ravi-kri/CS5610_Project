@@ -7,6 +7,7 @@ var request = require('request');
 
 router.get("/", function (req, res) {
     let noMatch = null;
+    if(!req.user){
     if (req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         Recipe.find({name: regex}, function (err, allRecipes) {
@@ -28,6 +29,29 @@ router.get("/", function (req, res) {
             }
         });
     }
+}else {
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Recipe.find({name: regex}, function (err, allRecipes) {
+            if (err) {
+                console.log(err);
+            } else {
+                if (allRecipes.length < 1) {
+                    noMatch = "No recipes found, please try again.";
+                }
+                res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
+            }
+        });
+    } else {
+        Recipe.find({}, function (err, allRecipes) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
+            }
+        });
+    }
+}
 });
 
 router.get("/search", function (req, res) {

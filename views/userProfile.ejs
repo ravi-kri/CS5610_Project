@@ -23,7 +23,7 @@
                                 <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
                                     <div class="profilethumbnail" class="caption">
                                         <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
-                                       
+                                        <% console.log(currentUser) %>
                                         <div class="form-group">
                                             <a href="/recipes/<%= recipe._id %>/edit">
                                                 <button class="btn btn-warning ">Edit</button>

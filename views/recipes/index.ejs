@@ -25,7 +25,20 @@
                     <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>"></a>
                     <div class="caption">
                         <h4> <%= recipe.name %> </h4>
+                        
                         <h3>Submitted by : <%= recipe.author.username %></h3>
+                        <% if(currentUser){ %>
+                            <% if(currentUser.username == recipe.author.username){ %>
+                        <div class="form-group">
+                                <a href="/recipes/<%= recipe._id %>/edit">
+                                    <button class="btn btn-warning ">Edit</button>
+                                </a>
+                                <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE"
+                                      method="POST">
+                                    <button class="btn btn-danger ">Delete</button>
+                                </form>
+                            </div>
+                            <% } } %>
                     </div>
                 </div>
             </div>
