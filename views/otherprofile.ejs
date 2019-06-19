@@ -1,0 +1,72 @@
+<% include ./styling/header %>
+<h1 id="userGreeting"><%= foundUser.firstName %> <%= foundUser.lastName %> </h1>
+
+<div class="container">
+        <div class="row">
+            <div id="accountdetails" class="col-md-3">
+                <p class="lead">Account details :</p>
+                <h4 class="userprofile"> First Name : <span id="userdetails"><%= foundUser.firstName %></span></h4>
+                <h4 class="userprofile"> Last Name : <span id="userdetails"><%= foundUser.lastName %></span></h4>
+                <h4 class="userprofile"> Username : <span id="userdetails"><%= foundUser.username %></span></h4>
+            </div>
+
+            <div class="col-md-9">
+                        <p class="lead">Recipes added by <%= foundUser.firstName %>:</p>
+                        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+                            <% userRecipes.forEach(function(recipe){ %>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="thumbnail">
+                                        <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
+                                            <div class="profilethumbnail" class="caption">
+                                                <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                </div>
+
+
+
+<div>
+        <p class="lead">Bookmarked Recipes by our Chefs by <%= foundUser.firstName %>:</p>
+                <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+                    <% bookmarkedRecipesforSending.forEach(function(recipe){ %>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="thumbnail">
+                                    <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
+                                        <div class="profilethumbnail" class="caption">
+                                            <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
+                                        </a>
+                                            
+                                            <h3 class="profilethumbnail">
+                                                    <a href="/profile/other/<%= recipe.author.id %>">
+                                                Added By: <%= recipe.author.username %>
+                                                    </a>
+                                            
+                                            </h3>
+                                        </div>
+                                
+                                </div>
+                            </div>
+                    <%  }); %>
+                </div>
+            </div>
+<div>
+    <p class="lead">Bookmarked Recipes by people around the world</p>
+            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+                <% bookmarkedRecipesapiarray.forEach(function(recipe){ %>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="thumbnail">
+                                <img class="gridhome" src="<%= recipe.image_url %>">
+                                    <div class="profilethumbnail" class="caption">
+                                        <h4 class="profilethumbnail"> <%= recipe.title %> </h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                <%  }); %>
+            </div>
+        </div>
+<% include ./styling/footer %>

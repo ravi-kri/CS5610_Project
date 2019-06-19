@@ -26,7 +26,9 @@
                     <div class="caption">
                         <h4> <%= recipe.name %> </h4>
                         
-                        <h3>Submitted by : <%= recipe.author.username %></h3>
+                        <h3>Submitted by : 
+                                <a href="/profile/other/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                        </h3>
                         <% if(currentUser){ %>
                             <% if(currentUser.username == recipe.author.username){ %>
                         <div class="form-group">
