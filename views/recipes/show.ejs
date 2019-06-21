@@ -39,7 +39,32 @@
                 <input type="text" hidden name="idofrecipe" value="<%= recipe._id %>">
             </form>
             <% } %>
+            <br><br>
+            <h3 class="text-success text-styling">Submitted by :
+                    <%   if(currentUser){ %>
+                        <%    if(currentUser.username == recipe.author.username){ %>
+                                <a href="/profile"><%= recipe.author.username %> </a>
+                                    
+                      <%      } else { %>
+                        <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                        
+                   <%   }} else {   %>
+                    <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                    
+                     <%   }    %>
+            </h3>
+            <br>
+            <h4><u>Recipe bookmarked by</u>:</h4>
+            <ul>
+                <% recipe.bookmarkedBy.forEach(function(user){ %>
+                <li>
+                    <h4>
+                        <a href="/profile/<%= user._id %>"><%= user.username %></a>
 
+                    </h4>
+                </li>
+                <% }); %>
+            </ul>
         </div>
         <div class="col-10 mx-auto col-md-6 my-3">
 
@@ -61,31 +86,7 @@
             <h3><u>Description</u></h3>
             <p><%= recipe.description %></p>
 
-            <h3 class="text-success text-styling">Submitted by :
-                    <%   if(currentUser){ %>
-                        <%    if(currentUser.username == recipe.author.username){ %>
-                                <a href="/profile"><%= recipe.author.username %> </a>
-                                    
-                      <%      } else { %>
-                        <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
-                        <
-                   <%   }} else {   %>
-                    <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
-                    
-                     <%   }    %>
-            </h3>
-            <br>
-            <h5>Recipe Bookmarked by:-</h5>
-            <ul>
-                <% recipe.bookmarkedBy.forEach(function(user){ %>
-                <li>
-                    <h4>
-                        <a href="/profile/<%= user._id %>"><%= user.username %></a>
-
-                    </h4>
-                </li>
-                <% }); %>
-            </ul>
+           
 
         </div>
 
