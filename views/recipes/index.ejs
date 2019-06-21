@@ -3,8 +3,7 @@
 <div class="container">
     <header class="jumbotron" style="background-color:aliceblue">
         <div class="container" id="searchdesc">
-            <h1><span class="glyphicon glyphicon-apple align-bottom" aria-hidden="true"></span> Recipe
-                Center</h1>
+            <h1><i class="fa fa-cutlery" aria-hidden="true"></i> Recipe Center</h1>
             <div>
                 <p>View recipes from the chefs on our website</p>
                 <form action="/recipes" method="GET">
@@ -12,7 +11,7 @@
                         <label for="search"></label>
                         <input class="form-control" type="text" name="search" placeholder="Search recipes">
                         <br>
-                        <button class="btn btn-primary">Search</button>
+                        <button class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                     </div>
                 </form>
             </div>
@@ -21,33 +20,36 @@
 
     <div class="row">
         <% recipes.forEach(function(recipe){ %>
-        <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%" alt="recipe" />
-                <div class="card-body">
-                    <h5 class="card-title"><%= recipe.name %></h5>
-                    <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
-                    </h6>
-                </div>
-                <div class="card-footer">
-                    <a href="/recipes/<%= recipe._id %>" class="btn btn-info">View Recipe </a>
-                    <% if(currentUser){ %>
-                    <% if(currentUser.username == recipe.author.username){ %>
-                    <a href="/recipes/<%= recipe._id %>/edit">
-                        <button class="btn btn-warning ">Edit</button>
-                    </a>
-                    <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
-                    </form>
-                    <% } } %>
+            <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                <div class="card">
+                    <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%" alt="recipe"/>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= recipe.name %></h5>
+                        <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                        </h6>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/recipes/<%= recipe._id %>" class="btn btn-info">View Recipe </a>
+                        <% if(currentUser){ %>
+                            <% if(currentUser.username == recipe.author.username){ %>
+                                <a href="/recipes/<%= recipe._id %>/edit">
+                                    <button class="btn btn-warning ">Edit</button>
+                                </a>
+                                <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE"
+                                      method="POST">
+                                    <button class="btn btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this item?');">
+                                        Delete
+                                    </button>
+                                </form>
+                        <% } } %>
+                    </div>
                 </div>
             </div>
-        </div>
 
         <% }); %>
 
     </div>
 </div>
 </body>
-
 </html>

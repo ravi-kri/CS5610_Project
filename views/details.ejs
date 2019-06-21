@@ -10,7 +10,7 @@
                 <% if(!alreadyBookmarked){ %>
                     <form action="/bookmarkedapi" method="POST">
                         <button class="btn btn-danger ">
-                            Bookmark
+                            <i class="far fa-bookmark"></i>Add
                         </button>
                         <input type="text" hidden name="title" value="<%= noMatch.title %>">
                         <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
@@ -22,7 +22,7 @@
                 <% } else if(alreadyBookmarked){ %>
                     <form action="/removebookmarkedapi" method="POST">
                         <button class="btn btn-danger ">
-                            Remove Bookmark
+                            <i class="far fa-bookmark"></i>Remove
                         </button>
                         <input type="text" hidden name="title" value="<%= noMatch.title %>">
                         <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
@@ -31,10 +31,10 @@
                         <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
                         <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
                     </form>
-               <% }}    else { %>
+            <% }}    else { %>
                 <form action="/bookmarkedapi" method="POST">
                     <button class="btn btn-danger ">
-                        Bookmark
+                        <i class="far fa-bookmark"></i>Add
                     </button>
                     <input type="text" hidden name="title" value="<%= noMatch.title %>">
                     <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
@@ -43,24 +43,24 @@
                     <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
                     <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
                 </form>
-                <% } %>
+            <% } %>
 
             <br>
             <h5>Recipe Bookmarked by:-</h5>
             <ul>
-                    <% users.forEach(function(user){ %>
+                <% users.forEach(function(user){ %>
                     <li>
                         <h4>
                             <a href="/profile/<%= user._id %>"><%= user.username %></a>
-    
+
                         </h4>
                     </li>
-                    <% }); %>
-                </ul>
+                <% }); %>
+            </ul>
         </div>
         <div class="col-10 mx-auto col-md-6 my-3">
 
-            <h2><%= noMatch.title  %></h2>
+            <h2><%= noMatch.title %></h2>
             <br>
             <h3 class="text-warning text-styling">Submitted by :
 
@@ -71,15 +71,15 @@
             <ul class="list-group mt-4">
                 <h2 class="mt-3 mb-4">Ingredients</h2>
                 <% noMatch.ingredients.forEach(function(item){ %>
-                <li class="list-group-item text-styling">
-                    <%= item %>
-                </li>
+                    <li class="list-group-item text-styling">
+                        <%= item %>
+                    </li>
                 <% }) %>
             </ul>
             <br>
             <a class="btn btn-primary" target="_blank" href=" <%= noMatch.source_url %>"> View Source </a>
-    
-           
+
+
         </div>
     </div>
 </div>

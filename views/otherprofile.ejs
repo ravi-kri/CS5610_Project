@@ -14,83 +14,82 @@
             <p class="lead">Recipes added by <%= foundUser.firstName %>:</p>
             <div class="row">
                 <% userRecipes.forEach(function(recipe){ %>
-                <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
-                    <div class="card">
-                        <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%"
-                            alt="recipe" />
-                        <div class="card-body">
-                            <h5 class="card-title"><%= recipe.name %></h5>
-                            <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
-                            </h6>
-                        </div>
-                        <div class="card-footer">
-                            <a href="/recipes/<%= recipe._id %>" class="btn btn-info  btn-sm">View Recipe </a>
+                    <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                        <div class="card">
+                            <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%"
+                                 alt="recipe"/>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= recipe.name %></h5>
+                                <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                                </h6>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/recipes/<%= recipe._id %>" class="btn btn-info  btn-sm">View Recipe </a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <% }); %>
             </div>
         </div>
 
 
-
         <div class="col-md-3">
-            </div>
-            <div class="col-md-9">
+        </div>
+        <div class="col-md-9">
             <p class="lead">Bookmarked Recipes by our Chefs by <%= foundUser.firstName %>:</p>
             <div class="row">
                 <% bookmarkedRecipesforSending.forEach(function(recipe){ %>
                     <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
-                            <div class="card">
-                                <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%"
-                                    alt="recipe" />
-                                <div class="card-body">
-                                    <h5 class="card-title"><%= recipe.name %></h5>
-                                    <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
-                                    </h6>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="/recipes/<%= recipe._id %>" class="btn btn-info  btn-sm">View Recipe </a>
-                                </div>
+                        <div class="card">
+                            <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%"
+                                 alt="recipe"/>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= recipe.name %></h5>
+                                <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                                </h6>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/recipes/<%= recipe._id %>" class="btn btn-info  btn-sm">View Recipe </a>
                             </div>
                         </div>
-            <%  }); %>
+                    </div>
+                <% }); %>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3">
+        <div class="col-md-3">
         </div>
-        <div class="col-md-9"> 
-        <p class="lead">Bookmarked Recipes by people around the world</p>
-        <div class="row">
-            <% bookmarkedRecipesapiarray.forEach(function(recipe){ %>
-                <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+        <div class="col-md-9">
+            <p class="lead">Bookmarked Recipes by people around the world</p>
+            <div class="row">
+                <% bookmarkedRecipesapiarray.forEach(function(recipe){ %>
+                    <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
                         <div class="card">
                             <img src="<%= recipe.image_url %>" class="img-card-top" style="height:14rem;width:100%"
-                                alt="recipe" />
-    
-    
+                                 alt="recipe"/>
+
+
                             <div class="card-body">
                                 <h5 class="card-title"><%= recipe.title %></h5>
                                 <h6>Published By: <%= recipe.publisher %> </h6>
                             </div>
                             <div class="card-footer">
-    
+
                                 <label for="recipe_id"></label>
                                 <form action="/details" method="GET">
-                                   
-                                        <button class="btn btn-info">View Recipe</button>
-                                
+
+                                    <button class="btn btn-info">View Recipe</button>
+
                                     <input type="hidden" name="recipe_id" value="<%= recipe.recipe_id %>">
                                 </form>
-    
+
                             </div>
                         </div>
                     </div>
-            <%  }); %>
+                <% }); %>
+            </div>
         </div>
     </div>
-    </div>
 </div>
-    </body>
+</body>
 
-    </html>
+</html>

@@ -3,8 +3,7 @@
 <div class="container">
     <header class="jumbotron" style="background-color:aliceblue">
         <div class="container" id="searchdesc">
-            <h1><span class="glyphicon glyphicon-apple align-bottom" aria-hidden="true"></span> Recipe
-                Center</h1>
+            <h1><i class="fa fa-cutlery" aria-hidden="true"></i> Recipe Center</h1>
             <div>
                 <p>View recipes from people around the world</p>
                 <div class="form-group has-feedback">
@@ -12,7 +11,7 @@
                     <form method="GET" action="/search">
                         <input class="form-control" type="text" name="recipe" placeholder="Search recipes">
                         <br>
-                        <button class="btn btn-ptimary">Search</button>
+                        <button class="btn btn-ptimary"><i class="fa fa-search"></i> Search</button>
                     </form>
                 </div>
             </div>
@@ -21,35 +20,35 @@
 
     <% if(typeof noMatch != 'undefined'){ %>
         <div class="row">
-                <% noMatch.forEach(function(recipe){ %>
-                    <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
-                            <div class="card">
-                                            <img src="<%= recipe.image_url %>"
-                                                   class="img-card-top"
-                                                   style="height:14rem;width:100%"
-                                                   alt="recipe" />
-                                             
-                                                           
+            <% noMatch.forEach(function(recipe){ %>
+                <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                    <div class="card">
+                        <img src="<%= recipe.image_url %>"
+                             class="img-card-top"
+                             style="height:14rem;width:100%"
+                             alt="recipe"/>
+
+
                         <div class="card-body">
-                        <h5 class="card-title"><%= recipe.title %></h5>
-                                <h6>Published By: <%= recipe.publisher %> </h6>
-                                </div>
-                                <div class="card-footer"> 
-                        
-                                        <label for="recipe_id"></label>
-                                        <form action="/details" method="GET">
-                                          
-                                                <button class="btn btn-info">View Recipe</button>
-                                           
-                                            <input type="hidden" name="recipe_id" value="<%= recipe.recipe_id %>">
-                                        </form>  
-            
-                                </div>
-                            </div>
+                            <h5 class="card-title"><%= recipe.title %></h5>
+                            <h6>Published By: <%= recipe.publisher %> </h6>
                         </div>
-                <% }) %>
-            </div>
-      
+                        <div class="card-footer">
+
+                            <label for="recipe_id"></label>
+                            <form action="/details" method="GET">
+
+                                <button class="btn btn-info">View Recipe</button>
+
+                                <input type="hidden" name="recipe_id" value="<%= recipe.recipe_id %>">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+
     <% } %>
 </div>
 </div>

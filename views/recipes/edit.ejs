@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div style="width:30%; margin: 30px auto;">
-                <h1 class="h3 mb-3 font-weight-normal">Edit your Recipe</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Edit your Recipe</h1>
             <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <input class="form-control" required type="text" name="recipe[name]" value="<%= recipe.name %>">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group">
                     <textarea style="width: 100%" name="recipe[ingredients]" required
-                       ><%= recipe.ingredients %>
+                    ><%= recipe.ingredients %>
 					</textarea>
                 </div>
                 <div class="form-group">
@@ -27,7 +27,7 @@
                     <button class="btn btn-info btn-block">Update</button>
                 </div>
             </form>
-          
+
         </div>
     </div>
 </div>

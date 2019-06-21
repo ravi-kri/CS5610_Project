@@ -1,5 +1,5 @@
 var express = require("express");
-var router = express.Router({ mergeParams: true });
+var router = express.Router({mergeParams: true});
 var Recipe = require("../models/recipe");
 var Profile = require("../models/user");
 
@@ -8,7 +8,7 @@ router.get("/:id/edit", isLoggedIn, function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("users/edit", { user: foundUser });
+            res.render("users/edit", {user: foundUser});
         }
     });
 });
@@ -28,7 +28,7 @@ router.get("/", isLoggedIn, function (req, res) {
                         if (err) {
                             console.log(err);
                         } else {
-                            Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
+                            Recipe.find({"_id": {"$in": foundUser.recipesBookmarked}})
                                 .exec(function (err, bookmarkedRecipesforSending) {
                                     if (err) {
                                         return console.log(err);
@@ -63,7 +63,7 @@ router.get("/:id", function (req, res) {
                 } else {
 
 
-                    Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
+                    Recipe.find({"_id": {"$in": foundUser.recipesBookmarked}})
                         .exec(function (err, bookmarkedRecipesforSending) {
                             if (err) {
                                 return console.log(err);

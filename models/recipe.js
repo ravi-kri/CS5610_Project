@@ -4,23 +4,23 @@ var recipeSchema = new mongoose.Schema({
     name: String,
     image: String,
     imageId: String,
-    ingredients:String,
+    ingredients: String,
     description: String,
     author:
-    {
-        id:
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            id:
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User"
+                },
+            username: String
         },
-        username: String
-    },
     bookmarkedBy: [{
         id:
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
         username: String
     }]
 });

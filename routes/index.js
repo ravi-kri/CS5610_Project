@@ -10,14 +10,14 @@ router.get("/", function (req, res) {
     if (!req.user) {
         if (req.query.search) {
             const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-            Recipe.find({ name: regex }, function (err, allRecipes) {
+            Recipe.find({name: regex}, function (err, allRecipes) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (allRecipes.length < 1) {
                         noMatch = "No recipes found, please try again.";
                     }
-                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
+                    res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
                 }
             });
         } else {
@@ -25,21 +25,21 @@ router.get("/", function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
+                    res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
                 }
             });
         }
     } else {
         if (req.query.search) {
             const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-            Recipe.find({ name: regex }, function (err, allRecipes) {
+            Recipe.find({name: regex}, function (err, allRecipes) {
                 if (err) {
                     console.log(err);
                 } else {
                     if (allRecipes.length < 1) {
                         noMatch = "No recipes found, please try again.";
                     }
-                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
+                    res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
                 }
             });
         } else {
@@ -47,7 +47,7 @@ router.get("/", function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
+                    res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
                 }
             });
         }
@@ -56,31 +56,33 @@ router.get("/", function (req, res) {
 
 router.get("/search", function (req, res) {
     url = "https://www.food2fork.com/api/search?key=d088c14b6ef55995aebe59e55e37e5cf&q=" + req.query.recipe;
-    request({ url, json: true }, function (err, reso, json) {
+    request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
-        } else { }
+        } else {
+        }
         noMatch = json['recipes'];
-        res.render("search", { noMatch: noMatch })
+        res.render("search", {noMatch: noMatch})
     });
 });
 
 router.get("/details", function (req, res) {
     url = "https://www.food2fork.com/api/get?key=d088c14b6ef55995aebe59e55e37e5cf&rId=" + req.query.recipe_id;
-    request({ url, json: true }, function (err, reso, json) {
+    request({url, json: true}, function (err, reso, json) {
         if (err) {
             throw err;
         } else {
             let alreadyBookmarked = false
             noMatch = json['recipe'];
-            User.find({ recipesBookmarkedapi: { $elemMatch: { recipe_id: req.query.recipe_id } } }, function (err, users) {
-                if(req.user){
-                users.forEach(function(user){ 
-                    if(user.username == req.user.username){
-                        alreadyBookmarked = true
-                    }
-                })}
-                res.render("details", { noMatch: noMatch, users: users, alreadyBookmarked: alreadyBookmarked })
+            User.find({recipesBookmarkedapi: {$elemMatch: {recipe_id: req.query.recipe_id}}}, function (err, users) {
+                if (req.user) {
+                    users.forEach(function (user) {
+                        if (user.username == req.user.username) {
+                            alreadyBookmarked = true
+                        }
+                    })
+                }
+                res.render("details", {noMatch: noMatch, users: users, alreadyBookmarked: alreadyBookmarked})
             })
 
         }
@@ -216,9 +218,9 @@ router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
 
 //remove bookmark from api recipes
 router.post("/removebookmarkedapi", isLoggedIn, function (req, res) {
-    User.update({_id : req.user._id},{$pull : {recipesBookmarkedapi: {recipe_id: req.body.recipe_id}}},function(){
+    User.update({_id: req.user._id}, {$pull: {recipesBookmarkedapi: {recipe_id: req.body.recipe_id}}}, function () {
         req.flash("success", "Successfully removed bookmark!");
-        res.redirect("/recipes");  
+        res.redirect("/recipes");
     })
 });
 
