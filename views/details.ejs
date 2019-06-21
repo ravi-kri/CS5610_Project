@@ -10,7 +10,7 @@
                 <% if(!alreadyBookmarked){ %>
                     <form action="/bookmarkedapi" method="POST">
                         <button class="btn btn-danger ">
-                            <i class="far fa-bookmark"></i>Add
+                            <i class="fa fa-bookmark"></i> Add
                         </button>
                         <input type="text" hidden name="title" value="<%= noMatch.title %>">
                         <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
@@ -22,7 +22,7 @@
                 <% } else if(alreadyBookmarked){ %>
                     <form action="/removebookmarkedapi" method="POST">
                         <button class="btn btn-danger ">
-                            <i class="far fa-bookmark"></i>Remove
+                            <i class="fa fa-bookmark"></i> Remove
                         </button>
                         <input type="text" hidden name="title" value="<%= noMatch.title %>">
                         <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
@@ -34,7 +34,7 @@
             <% }}    else { %>
                 <form action="/bookmarkedapi" method="POST">
                     <button class="btn btn-danger ">
-                        <i class="far fa-bookmark"></i>Add
+                        <i class="fa fa-bookmark"></i> Add
                     </button>
                     <input type="text" hidden name="title" value="<%= noMatch.title %>">
                     <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
