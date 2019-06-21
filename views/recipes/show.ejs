@@ -62,9 +62,17 @@
             <p><%= recipe.description %></p>
 
             <h3 class="text-success text-styling">Submitted by :
-                <a href="/profile/<%= recipe.author.id %>">
-                    <%= recipe.author.username %>
-                </a>
+                    <%   if(currentUser){ %>
+                        <%    if(currentUser.username == recipe.author.username){ %>
+                                <a href="/profile"><%= recipe.author.username %> </a>
+                                    
+                      <%      } else { %>
+                        <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                        <
+                   <%   }} else {   %>
+                    <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                    
+                     <%   }    %>
             </h3>
             <br>
             <h5>Recipe Bookmarked by:-</h5>

@@ -25,8 +25,17 @@
                     <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%" alt="recipe"/>
                     <div class="card-body">
                         <h5 class="card-title"><%= recipe.name %></h5>
+                        <%   if(currentUser){ %>
+                            <%    if(currentUser.username == recipe.author.username){ %>
+                                    <h6><a href="/profile"><%= recipe.author.username %> </a>
+                                    </h6>    
+                          <%      } else { %>
+                            <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                            </h6>
+                       <%   }} else {   %>
                         <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
                         </h6>
+                         <%   }    %>
                     </div>
                     <div class="card-footer">
                         <a href="/recipes/<%= recipe._id %>" class="btn btn-info">View Recipe </a>

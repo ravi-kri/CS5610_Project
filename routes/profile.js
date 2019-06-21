@@ -68,7 +68,7 @@ router.get("/:id", function (req, res) {
                             if (err) {
                                 return console.log(err);
                             } else {
-
+                               
                                 res.render("otherprofile", {
                                     foundUser: foundUser, userRecipes: userRecipes,
                                     bookmarkedRecipesapiarray: foundUser.recipesBookmarkedapi,
