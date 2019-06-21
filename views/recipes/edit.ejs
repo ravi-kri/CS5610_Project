@@ -13,9 +13,16 @@
                     <input type="file" id="image" required name="image" accept="image/*">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" required type="text" name="recipe[description]"
-                           value="<%= recipe.description %>">
+                    <textarea style="width: 100%" name="recipe[ingredients]" required
+                       ><%= recipe.ingredients %>
+					</textarea>
                 </div>
+                <div class="form-group">
+                    <textarea style="width: 100%" name="recipe[description]" required
+                    ><%= recipe.description %>
+                    </textarea>
+                </div>
+                <!--  -->
                 <div class="form-group">
                     <button class="btn btn-info btn-block">Update</button>
                 </div>

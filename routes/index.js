@@ -94,10 +94,10 @@ router.get("/login", function (req, res) {
     res.render("login");
 });
 
-// Login, GET & POST
-router.get("/search", function (req, res) {
-    res.render("search")
-});
+// // Login, GET & POST
+// router.get("/search", function (req, res) {
+//     res.render("search")
+// });
 
 
 router.post("/login", (req, res, next) => {

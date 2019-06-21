@@ -114,9 +114,7 @@ router.put("/:id", upload.single('image'), function (req, res) {
             }
             recipe.name = req.body.recipe.name;
             recipe.description = req.body.recipe.description;
-            recipe.location = req.body.recipe.location;
-            recipe.features = req.body.recipe.features;
-            recipe.activities = req.body.recipe.activities;
+            recipe.ingredients = req.body.recipe.ingredients;
             recipe.save();
             req.flash("success", "Successfully Updated!");
             res.redirect("/recipes/" + recipe._id);
