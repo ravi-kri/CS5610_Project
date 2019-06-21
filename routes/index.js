@@ -7,72 +7,72 @@ var request = require('request');
 
 router.get("/", function (req, res) {
     let noMatch = null;
-    if(!req.user){
-    if (req.query.search) {
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        Recipe.find({name: regex}, function (err, allRecipes) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (allRecipes.length < 1) {
-                    noMatch = "No recipes found, please try again.";
+    if (!req.user) {
+        if (req.query.search) {
+            const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+            Recipe.find({ name: regex }, function (err, allRecipes) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (allRecipes.length < 1) {
+                        noMatch = "No recipes found, please try again.";
+                    }
+                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
                 }
-                res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
-            }
-        });
-    } else {
-        Recipe.find({}, function (err, allRecipes) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
-            }
-        });
-    }
-}else {
-    if (req.query.search) {
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        Recipe.find({name: regex}, function (err, allRecipes) {
-            if (err) {
-                console.log(err);
-            } else {
-                if (allRecipes.length < 1) {
-                    noMatch = "No recipes found, please try again.";
+            });
+        } else {
+            Recipe.find({}, function (err, allRecipes) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
                 }
-                res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
-            }
-        });
+            });
+        }
     } else {
-        Recipe.find({}, function (err, allRecipes) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
-            }
-        });
+        if (req.query.search) {
+            const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+            Recipe.find({ name: regex }, function (err, allRecipes) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (allRecipes.length < 1) {
+                        noMatch = "No recipes found, please try again.";
+                    }
+                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
+                }
+            });
+        } else {
+            Recipe.find({}, function (err, allRecipes) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.render("recipes/index", { recipes: allRecipes, page: "recipes", noMatch: noMatch });
+                }
+            });
+        }
     }
-}
 });
 
 router.get("/search", function (req, res) {
-    url = "https://www.food2fork.com/api/search?key=78e22227df9ad4d0f6bf9d0b916d00df&q=" + req.query.recipe;
-    request({url, json: true}, function (err, reso, json) {
+    url = "https://www.food2fork.com/api/search?key=54c126fd623171f79bedaf70c4046187&q=" + req.query.recipe;
+    request({ url, json: true }, function (err, reso, json) {
         if (err) {
             throw err;
         }
         noMatch = json['recipes'];
-        res.render("search", {noMatch: noMatch})
+        res.render("search", { noMatch: noMatch })
     });
 });
 
 router.get("/details", function (req, res) {
-    url = "https://www.food2fork.com/api/get?key=78e22227df9ad4d0f6bf9d0b916d00df&rId=" + req.query.recipe_id;
-    request({url, json: true}, function (err, reso, json) {
+    url = "https://www.food2fork.com/api/get?key=54c126fd623171f79bedaf70c4046187&rId=" + req.query.recipe_id;
+    request({ url, json: true }, function (err, reso, json) {
         if (err) {
             throw err;
         }
         noMatch = json['recipe'];
-        res.render("details", {noMatch: noMatch})
+        res.render("details", { noMatch: noMatch })
     });
 });
 

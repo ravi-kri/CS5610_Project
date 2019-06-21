@@ -2,29 +2,45 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
-            <div class="thumbnail">
-                <img class="img-responsive" src="<%= noMatch.image_url %>">
-                <div class="caption-full">
-                    <form action="/bookmarkedapi" method="POST">
-                        <h4><a><%= noMatch.title %></a></h4>
-                        <a><%= noMatch.source_url %></a>
-                        <p>
-                            <em>Submitted by : <%= noMatch.publisher_url %></em>
-                        </p>
-                        <button class="btn btn-default btn-sm">
-                            <span class="glyphicon glyphicon-bookmark"></span> Bookmark
-                        </button>
-                        <input type="text" hidden name="title" value="<%= noMatch.title %>">
-                        <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
-                        <input type="text" hidden name="publisher_url" value="<%= noMatch.publisher_url %>">
-                        <input type="text" hidden name="recipe_id" value="<%= noMatch.recipe_id %>">
-                        <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
-                    </form>
-                </div>
-            </div>
+        <div class="col-10 mx-auto col-md-6 my-3">
+            <img class="d-block w-100" src="<%= noMatch.image_url %>">
+            <br>
+            <form action="/bookmarkedapi" method="POST">
+                <button class="btn btn-danger ">
+                    Bookmark
+                </button>
+                <input type="text" hidden name="title" value="<%= noMatch.title %>">
+                <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
+                <input type="text" hidden name="publisher_url" value="<%= noMatch.publisher_url %>">
+                <input type="text" hidden name="recipe_id" value="<%= noMatch.recipe_id %>">
+                <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
+                <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
+            </form>
+        </div>
+        <div class="col-10 mx-auto col-md-6 my-3">
+
+            <h2><%= noMatch.title  %></h2>
+            <br>
+            <h3 className="text-warning text-styling">Submitted by :
+
+                <%= noMatch.publisher %>
+
+            </h3>
+            <br>
+            <ul class="list-group mt-4">
+                <h2 class="mt-3 mb-4">Ingredients</h2>
+                <% noMatch.ingredients.forEach(function(item){ %>
+                <li class="list-group-item text-styling">
+                    <%= item %>
+                </li>
+                <% }) %>
+            </ul>
+            <br>
+            <a class="btn btn-primary" target="_blank" href=" <%= noMatch.source_url %>"> View Source </a>
+            <br><br>
+            <h5>Recipe Bookmarked by:-</h5>
         </div>
     </div>
 </div>
-
-<% include ./styling/footer %>
+</body>
+</html>

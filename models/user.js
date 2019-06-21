@@ -4,7 +4,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var UserSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    email: {type: String, unique: true, required: true},
+    email: { type: String, unique: true, required: true },
     type: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
@@ -16,12 +16,13 @@ var UserSchema = new mongoose.Schema({
             ref: "recipe"
         }
     ],
-    recipesBookmarkedapi: [ {
+    recipesBookmarkedapi: [{
         title: String,
         source_url: String,
         publisher_url: String,
-        recipe_id : String,
-        image_url: String
+        recipe_id: String,
+        image_url: String,
+        publisher: String
     }]
 });
 

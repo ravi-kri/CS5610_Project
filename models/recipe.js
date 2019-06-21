@@ -6,21 +6,21 @@ var recipeSchema = new mongoose.Schema({
     imageId: String,
     description: String,
     author:
-        {
-            id:
-                {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "User"
-                },
-            username: String
-        },
-    bookmarkedBy:[{
+    {
         id:
-                {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: "User"
-                },
-            username: String
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    },
+    bookmarkedBy: [{
+        id:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
     }]
 });
 

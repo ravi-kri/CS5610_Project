@@ -14,7 +14,7 @@ var imageFilter = function (req, file, cb) {
     }
     cb(null, true);
 };
-var upload = multer({storage: storage, fileFilter: imageFilter});
+var upload = multer({ storage: storage, fileFilter: imageFilter });
 
 var cloudinary = require('cloudinary');
 cloudinary.config({
@@ -26,11 +26,11 @@ cloudinary.config({
 router.get("/", function (req, res) {
     if (req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        Recipe.find({name: regex}, function (err, allRecipes) {
+        Recipe.find({ name: regex }, function (err, allRecipes) {
             if (err) {
                 console.log(err);
             } else
-                res.render("recipes/index", {recipes: allRecipes, currentUser: req.user});
+                res.render("recipes/index", { recipes: allRecipes, currentUser: req.user });
         });
     } else {
 
@@ -38,7 +38,7 @@ router.get("/", function (req, res) {
             if (err) {
                 console.log(err);
             } else
-                res.render("recipes/index", {recipes: allRecipes, currentUser: req.user});
+                res.render("recipes/index", { recipes: allRecipes, currentUser: req.user });
         });
     }
 });
@@ -75,7 +75,7 @@ router.get("/:id", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("recipes/show", {recipe: foundRecipe});
+            res.render("recipes/show", { recipe: foundRecipe });
         }
     });
 });
@@ -83,7 +83,7 @@ router.get("/:id", function (req, res) {
 
 router.get("/:id/edit", recipeOwnershipAuthentication, function (req, res) {
     Recipe.findById(req.params.id, function (err, foundRecipe) {
-        res.render("recipes/edit", {recipe: foundRecipe});
+        res.render("recipes/edit", { recipe: foundRecipe });
     });
 });
 

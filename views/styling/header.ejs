@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Recipe Center</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/main.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
-<body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i> Recipe
-                Center</a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-expanded="false">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav navbar-right">
-                <% if(!currentUser){ %>
-                    <li><a href="/search">More Recipes</a></li>
-                    <% var chef = "chef" %>
-                    <li><a href="/recipes/add"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add a Recipe</a>
-                    </li>
-                    <li><a href="/login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i> Login</a></li>
-                    <li><a href="/register"><i class="glyphicon glyphicon-user" aria-hidden="true"></i> Sign Up</a></li>
-                <% } else { %>
-                    <li><a href="/search">More recipes</a></li>
-                    <li><a href="/profile">
-                        <i class="glyphicon glyphicon-leaf" aria-hidden="true"></i> Profile
-                    </a>
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-primary">
+        <a class="navbar-brand active" href="/">Recipe Center<span class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" href="/search">More Recipes</a>
                 </li>
-                    <% if(currentUser.type == "chef"){ %>
-                        <li><a href="/recipes/add"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add a
-                                Recipe</a>
-                        </li>
-                    <% } else {
-                    } %>
-                    <li><a href="/logout"><i class="glyphicon glyphicon-log-out" aria-hidden="true"></i> Logout</a></li>
+                <% if(!currentUser){ %>
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" href="/register">Sign Up</a>
+                </li>
+                <% } else { %>
+                <% if(currentUser.type == "chef"){ %>
+                <li class="nav-item"> <a class="nav-item nav-link active" href="/recipes/add">Add a Recipe</a></li>
+                <% } %>
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" href="/profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link active" href="/logout">Logout</a>
+                </li>
                 <% } %>
             </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<div class="container">
+    <div class="container">
 
-    <% if(error && error.length > 0){ %>
+        <% if(error && error.length > 0){ %>
         <div class="alert alert-danger" role="alert">
             <%= error %>
         </div>
-    <% } %>
-    <% if(success && success.length > 0){ %>
+        <% } %>
+        <% if(success && success.length > 0){ %>
         <div class="alert alert-success" role="alert">
             <%= success %>
         </div>
-    <% } %>
-</div>
+        <% } %>
+    </div>

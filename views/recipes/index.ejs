@@ -7,10 +7,11 @@
                 Center</h1>
             <div>
                 <p>View recipes from the chefs on our website</p>
-                <form class="form-inline" action="/recipes" method="GET">
+                <form action="/recipes" method="GET">
                     <div class="form-group has-feedback">
                         <label for="search"></label>
                         <input class="form-control" type="text" name="search" placeholder="Search recipes">
+                        <br>
                         <button class="btn btn-primary">Search</button>
                     </div>
                 </form>
@@ -18,34 +19,35 @@
         </div>
     </header>
 
-    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <div class="row">
         <% recipes.forEach(function(recipe){ %>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                    <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>"></a>
-                    <div class="caption">
-                        <h4> <%= recipe.name %> </h4>
-                        
-                        <h3>Submitted by : 
-                                <a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
-                        </h3>
-                        <% if(currentUser){ %>
-                            <% if(currentUser.username == recipe.author.username){ %>
-                        <div class="form-group">
-                                <a href="/recipes/<%= recipe._id %>/edit">
-                                    <button class="btn btn-warning ">Edit</button>
-                                </a>
-                                <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE"
-                                      method="POST">
-                                    <button class="btn btn-danger ">Delete</button>
-                                </form>
-                            </div>
-                            <% } } %>
-                    </div>
+        <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%" alt="recipe" />
+                <div class="card-body">
+                    <h5 class="card-title"><%= recipe.name %></h5>
+                    <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                    </h6>
+                </div>
+                <div class="card-footer">
+                    <a href="/recipes/<%= recipe._id %>" class="btn btn-info">View Recipe </a>
+                    <% if(currentUser){ %>
+                    <% if(currentUser.username == recipe.author.username){ %>
+                    <a href="/recipes/<%= recipe._id %>/edit">
+                        <button class="btn btn-warning ">Edit</button>
+                    </a>
+                    <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger ">Delete</button>
+                    </form>
+                    <% } } %>
                 </div>
             </div>
+        </div>
+
         <% }); %>
+
     </div>
 </div>
+</body>
 
-<% include ../styling/footer %>
+</html>

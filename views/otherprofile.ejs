@@ -2,71 +2,95 @@
 <h1 id="userGreeting"><%= foundUser.firstName %> <%= foundUser.lastName %> </h1>
 
 <div class="container">
-        <div class="row">
-            <div id="accountdetails" class="col-md-3">
-                <p class="lead">Account details :</p>
-                <h4 class="userprofile"> First Name : <span id="userdetails"><%= foundUser.firstName %></span></h4>
-                <h4 class="userprofile"> Last Name : <span id="userdetails"><%= foundUser.lastName %></span></h4>
-                <h4 class="userprofile"> Username : <span id="userdetails"><%= foundUser.username %></span></h4>
-            </div>
+    <div class="row">
+        <div id="accountdetails" class="col-md-3">
+            <p class="lead">Account details :</p>
+            <h4 class="userprofile"> First Name : <span id="userdetails"><%= foundUser.firstName %></span></h4>
+            <h4 class="userprofile"> Last Name : <span id="userdetails"><%= foundUser.lastName %></span></h4>
+            <h4 class="userprofile"> Username : <span id="userdetails"><%= foundUser.username %></span></h4>
+        </div>
 
-            <div class="col-md-9">
-                        <p class="lead">Recipes added by <%= foundUser.firstName %>:</p>
-                        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-                            <% userRecipes.forEach(function(recipe){ %>
-                                <div class="col-md-3 col-sm-6">
-                                    <div class="thumbnail">
-                                        <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
-                                            <div class="profilethumbnail" class="caption">
-                                                <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            <% }); %>
+        <div class="col-md-9">
+            <p class="lead">Recipes added by <%= foundUser.firstName %>:</p>
+            <div class="row">
+                <% userRecipes.forEach(function(recipe){ %>
+                <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                    <div class="card">
+                        <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%"
+                            alt="recipe" />
+                        <div class="card-body">
+                            <h5 class="card-title"><%= recipe.name %></h5>
+                            <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                            </h6>
                         </div>
-                </div>
-
-
-
-<div>
-        <p class="lead">Bookmarked Recipes by our Chefs by <%= foundUser.firstName %>:</p>
-                <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-                    <% bookmarkedRecipesforSending.forEach(function(recipe){ %>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="thumbnail">
-                                    <a href="/recipes/<%= recipe._id %>"><img class="gridhome" src="<%= recipe.image %>">
-                                        <div class="profilethumbnail" class="caption">
-                                            <h4 class="profilethumbnail"> <%= recipe.name %> </h4>
-                                        </a>
-                                            
-                                            <h3 class="profilethumbnail">
-                                                    <a href="/profile/<%= recipe.author.id %>">
-                                                Added By: <%= recipe.author.username %>
-                                                    </a>
-                                            
-                                            </h3>
-                                        </div>
-                                
-                                </div>
-                            </div>
-                    <%  }); %>
-                </div>
-            </div>
-<div>
-    <p class="lead">Bookmarked Recipes by people around the world</p>
-            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-                <% bookmarkedRecipesapiarray.forEach(function(recipe){ %>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="thumbnail">
-                                <img class="gridhome" src="<%= recipe.image_url %>">
-                                    <div class="profilethumbnail" class="caption">
-                                        <h4 class="profilethumbnail"> <%= recipe.title %> </h4>
-                                    </div>
-                                </a>
-                            </div>
+                        <div class="card-footer">
+                            <a href="/recipes/<%= recipe._id %>" class="btn btn-info  btn-sm">View Recipe </a>
                         </div>
-                <%  }); %>
+                    </div>
+                </div>
+                <% }); %>
             </div>
         </div>
-<% include ./styling/footer %>
+
+
+
+        <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+            <p class="lead">Bookmarked Recipes by our Chefs by <%= foundUser.firstName %>:</p>
+            <div class="row">
+                <% bookmarkedRecipesforSending.forEach(function(recipe){ %>
+                    <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                            <div class="card">
+                                <img src="<%= recipe.image %>" class="img-card-top" style="height:14rem;width:100%"
+                                    alt="recipe" />
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= recipe.name %></h5>
+                                    <h6><a href="/profile/<%= recipe.author.id %>"><%= recipe.author.username %> </a>
+                                    </h6>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="/recipes/<%= recipe._id %>" class="btn btn-info  btn-sm">View Recipe </a>
+                                </div>
+                            </div>
+                        </div>
+            <%  }); %>
+        </div>
+    </div>
+    <div class="col-md-3">
+        </div>
+        <div class="col-md-9"> 
+        <p class="lead">Bookmarked Recipes by people around the world</p>
+        <div class="row">
+            <% bookmarkedRecipesapiarray.forEach(function(recipe){ %>
+                <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                        <div class="card">
+                            <img src="<%= recipe.image_url %>" class="img-card-top" style="height:14rem;width:100%"
+                                alt="recipe" />
+    
+    
+                            <div class="card-body">
+                                <h5 class="card-title"><%= recipe.title %></h5>
+                                <h6>Published By: <%= recipe.publisher %> </h6>
+                            </div>
+                            <div class="card-footer">
+    
+                                <label for="recipe_id"></label>
+                                <form action="/details" method="GET">
+                                   
+                                        <button class="btn btn-info">View Recipe</button>
+                                
+                                    <input type="hidden" name="recipe_id" value="<%= recipe.recipe_id %>">
+                                </form>
+    
+                            </div>
+                        </div>
+                    </div>
+            <%  }); %>
+        </div>
+    </div>
+    </div>
+</div>
+    </body>
+
+    </html>

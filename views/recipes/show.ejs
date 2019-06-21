@@ -1,39 +1,50 @@
 <% include ../styling/header %>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-9">
-            <div class="thumbnail">
-                <img class="img-responsive" src="<%= recipe.image %>">
-                <div class="caption-full">
 
-                    <form action="/bookmarked" method="POST">
-                        <h4><a><%= recipe.name %></a></h4>
-                        <p><%= recipe.description %></p>
-                        <p>
-                            <em>Submitted by : <%= recipe.author.username %></em>
-                        </p>
-                        <% if(currentUser){ %>
-                            <% if(currentUser.username != recipe.author.username){ %>
-                        <button class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-bookmark"></span> Bookmark
-                        </button>
-                        <% }} %>
-                        <input type="text" hidden name="idofrecipe" value="<%= recipe._id %>">
-                    </form>
-                </div>
-            </div>
-            <h3>Recipe Bookmarked by:-</h3>
+    <div class="row">
+
+        <div class="col-10 mx-auto col-md-6 my-3">
+            <img class="d-block w-100" src="<%= recipe.image %>">
+            <br>
+            <form action="/bookmarked" method="POST">
+                <% if(currentUser){ %>
+                <% if(currentUser.username != recipe.author.username){ %>
+                <button class="btn btn-danger ">
+                    Bookmark
+                </button>
+                <% }} %>
+                <input type="text" hidden name="idofrecipe" value="<%= recipe._id %>">
+            </form>
+        </div>
+        <div class="col-10 mx-auto col-md-6 my-3">
+
+            <h2><%= recipe.name %></h2>
+
+            <h3 className="text-warning text-styling">Submitted by :
+                <a href="/profile/<%= recipe.author.id %>">
+                    <%= recipe.author.username %>
+                </a>
+            </h3>
+            <br>
+            <h3><u>Description</u></h3>
+            <p><%= recipe.description %></p>
+            <h5>Recipe Bookmarked by:-</h5>
             <ul>
-                    <% recipe.bookmarkedBy.forEach(function(user){ %>
-                        <li><h4>
-            <a href="/profile/<%= user._id %>"><%= user.username %></a>            
-                        
-                        </h4></li>
-                        <% }); %>
+                <% recipe.bookmarkedBy.forEach(function(user){ %>
+                <li>
+                    <h4>
+                        <a href="/profile/<%= user._id %>"><%= user.username %></a>
+
+                    </h4>
+                </li>
+                <% }); %>
             </ul>
         </div>
+
+
     </div>
 </div>
+</body>
 
-<% include ../styling/footer %>
+</html>

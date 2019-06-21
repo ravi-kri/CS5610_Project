@@ -13,7 +13,7 @@ var express = require("express"),
 
 app.locals.moment = moment;
 
-var  recipeRoutes = require("./routes/recipe"),
+var recipeRoutes = require("./routes/recipe"),
     indexRoutes = require("./routes/index"),
     userProfileRoute = require("./routes/profile");
 
@@ -41,7 +41,7 @@ app.use(function (req, res, next) {
 
 mongoose.connect("mongodb://heroku_75p99lp5:ujore4589fqioc2oor7nnbgv84@ds339177.mlab.com:39177/heroku_75p99lp5");
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));

@@ -1,5 +1,5 @@
 var express = require("express");
-var router = express.Router({mergeParams: true});
+var router = express.Router({ mergeParams: true });
 var Recipe = require("../models/recipe");
 var Profile = require("../models/user");
 
@@ -8,7 +8,7 @@ router.get("/:id/edit", isLoggedIn, function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("users/edit", {user: foundUser});
+            res.render("users/edit", { user: foundUser });
         }
     });
 });
@@ -24,54 +24,61 @@ router.get("/", isLoggedIn, function (req, res) {
                 if (err) {
                     console.log(err);
                 } else {
-					// allRecipe = everyRecipe
-					Recipe.find().where("author.id").equals(foundUser._id).exec((err, userRecipes) => {
-						if (err) {
-							console.log(err);
-						} else {
-						Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
-    					.exec(function (err, bookmarkedRecipesforSending){
-							if(err){
-								return console.log(err);
-							} else {
-						res.render("userProfile", {recipes: userRecipes, user: foundUser, 
-							bookmarkedRecipesapiarray : foundUser.recipesBookmarkedapi,
-							bookmarkedRecipesforSending : bookmarkedRecipesforSending,
-							allRecipe: everyRecipe});
-						}
-					});
-                }
+                    // allRecipe = everyRecipe
+                    Recipe.find().where("author.id").equals(foundUser._id).exec((err, userRecipes) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
+                                .exec(function (err, bookmarkedRecipesforSending) {
+                                    if (err) {
+                                        return console.log(err);
+                                    } else {
+                                        res.render("userProfile", {
+                                            recipes: userRecipes, user: foundUser,
+                                            bookmarkedRecipesapiarray: foundUser.recipesBookmarkedapi,
+                                            bookmarkedRecipesforSending: bookmarkedRecipesforSending,
+                                            allRecipe: everyRecipe
+                                        });
+                                    }
+                                });
+                        }
 
-			});
+                    });
+                }
+            });
         }
-    });
-        }})});
-        
+    })
+});
+
 
 router.get("/:id", function (req, res) {
-    
+
     Profile.findById(req.params.id).exec(function (err, foundUser) {
         if (err) {
-                    console.log(err);
+            console.log(err);
         } else {
             Recipe.find().where("author.id").equals(foundUser._id).exec((err, userRecipes) => {
                 if (err) {
-                         console.log(err);
-             } else {
+                    console.log(err);
+                } else {
 
 
-                Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
-                        .exec(function (err, bookmarkedRecipesforSending){
-                            if(err){
+                    Recipe.find({ "_id": { "$in": foundUser.recipesBookmarked } })
+                        .exec(function (err, bookmarkedRecipesforSending) {
+                            if (err) {
                                 return console.log(err);
                             } else {
 
-                    res.render("otherprofile",{foundUser:foundUser,userRecipes:userRecipes,
-                        bookmarkedRecipesapiarray : foundUser.recipesBookmarkedapi,
-                        bookmarkedRecipesforSending:bookmarkedRecipesforSending})
-                            
-                }})
-             }
+                                res.render("otherprofile", {
+                                    foundUser: foundUser, userRecipes: userRecipes,
+                                    bookmarkedRecipesapiarray: foundUser.recipesBookmarkedapi,
+                                    bookmarkedRecipesforSending: bookmarkedRecipesforSending
+                                })
+
+                            }
+                        })
+                }
             });
         }
     })

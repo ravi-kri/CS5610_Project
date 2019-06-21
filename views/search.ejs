@@ -1,4 +1,5 @@
 <% include ./styling/header %>
+
 <div class="container">
     <header class="jumbotron" style="background-color:aliceblue">
         <div class="container" id="searchdesc">
@@ -19,28 +20,36 @@
     </header>
 
     <% if(typeof noMatch != 'undefined'){ %>
-        <div class="container my-5">
-            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <div class="row">
                 <% noMatch.forEach(function(recipe){ %>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="thumbnail">
-                            <img class="gridhome" src="<%= recipe.image_url %>">
-                            <div class="caption">
-                                <h4> <%= recipe.title %> </h4>
-                                <h3>Submitted by : <%= recipe.publisher %></h3>
-                                <label for="recipe_id"></label>
-                                <form action="/details" method="GET">
-                                    <h5>
-                                        <button class="btn btn-info">View Recipe</button>
-                                    </h5>
-                                    <input type="hidden" name="recipe_id" value="<%= recipe.recipe_id %>">
-                                </form>
+                    <div class="col-10 mx-auto col-md-6 col-lg-4 my-3">
+                            <div class="card">
+                                            <img src="<%= recipe.image_url %>"
+                                                   class="img-card-top"
+                                                   style="height:14rem;width:100%"
+                                                   alt="recipe" />
+                                             
+                                                           
+                        <div class="card-body">
+                        <h5 class="card-title"><%= recipe.title %></h5>
+                                <h6>Published By: <%= recipe.publisher %> </h6>
+                                </div>
+                                <div class="card-footer"> 
+                        
+                                        <label for="recipe_id"></label>
+                                        <form action="/details" method="GET">
+                                          
+                                                <button class="btn btn-info">View Recipe</button>
+                                           
+                                            <input type="hidden" name="recipe_id" value="<%= recipe.recipe_id %>">
+                                        </form>  
+            
+                                </div>
                             </div>
                         </div>
-                    </div>
                 <% }) %>
             </div>
-        </div>
+      
     <% } %>
 </div>
 </div>
