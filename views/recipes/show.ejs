@@ -7,22 +7,37 @@
         <div class="col-10 mx-auto col-md-6 my-3">
             <img class="d-block w-100" src="<%= recipe.image %>">
             <br>
+                
                 <% if(currentUser){ %>
-                <% if(currentUser.username != recipe.author.username){ %>
+                <% if((currentUser.username != recipe.author.username) && (!alreadyBookmarked)){ %>
                     <form action="/bookmarked" method="POST">
                 <button class="btn btn-danger ">
                     Bookmark
                 </button>
                 <input type="text" hidden name="idofrecipe" value="<%= recipe._id %>">
             </form>
-                <% }   else{ %>
+                <% } else if((currentUser.username != recipe.author.username) && (alreadyBookmarked)){ %>
+                    <form action="/removebookmarked" method="POST">
+                        <button class="btn btn-danger ">
+                            Remove Bookmark
+                        </button>
+                        <input type="text" hidden name="idofrecipe" value="<%= recipe._id %>">
+                    </form>
+               <% }   else{ %>
                     <a href="/recipes/<%= recipe._id %>/edit">
                         <button class="btn btn-warning  btn-sm ">Edit</button>
                     </a>
                     <form class="delete-form" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger btn-sm">Delete</button>
                     </form>
-              <%  }} %>
+              <%  }  } else { %>
+                <form action="/bookmarked" method="POST">
+                    <button class="btn btn-danger ">
+                        Bookmark
+                    </button>
+                    <input type="text" hidden name="idofrecipe" value="<%= recipe._id %>">
+                </form>
+                <% } %>
                 
             
         </div>

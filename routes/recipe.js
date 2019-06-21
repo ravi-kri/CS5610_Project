@@ -75,9 +75,17 @@ router.get("/:id", function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.render("recipes/show", { recipe: foundRecipe });
+            if (req.user) {
+                if (req.user.recipesBookmarked.includes(req.params.id)) {
+                    res.render("recipes/show", { recipe: foundRecipe, alreadyBookmarked: true });
+                } else {
+                    res.render("recipes/show", { recipe: foundRecipe, alreadyBookmarked: false });
+                }
+            } else {
+                res.render("recipes/show", { recipe: foundRecipe, alreadyBookmarked: false });
+            }
         }
-    });
+    })
 });
 
 

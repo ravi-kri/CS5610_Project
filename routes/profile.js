@@ -16,7 +16,6 @@ router.get("/:id/edit", isLoggedIn, function (req, res) {
 
 router.get("/", isLoggedIn, function (req, res) {
     Profile.findById(req.user._id).exec(function (err, foundUser) {
-        console.log(req.user)
         if (err) {
             console.log(err);
         } else {

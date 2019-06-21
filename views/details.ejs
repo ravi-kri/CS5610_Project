@@ -5,17 +5,46 @@
         <div class="col-10 mx-auto col-md-6 my-3">
             <img class="d-block w-100" src="<%= noMatch.image_url %>">
             <br>
-            <form action="/bookmarkedapi" method="POST">
-                <button class="btn btn-danger ">
-                    Bookmark
-                </button>
-                <input type="text" hidden name="title" value="<%= noMatch.title %>">
-                <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
-                <input type="text" hidden name="publisher_url" value="<%= noMatch.publisher_url %>">
-                <input type="text" hidden name="recipe_id" value="<%= noMatch.recipe_id %>">
-                <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
-                <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
-            </form>
+
+            <% if(currentUser){ %>
+                <% if(!alreadyBookmarked){ %>
+                    <form action="/bookmarkedapi" method="POST">
+                        <button class="btn btn-danger ">
+                            Bookmark
+                        </button>
+                        <input type="text" hidden name="title" value="<%= noMatch.title %>">
+                        <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
+                        <input type="text" hidden name="publisher_url" value="<%= noMatch.publisher_url %>">
+                        <input type="text" hidden name="recipe_id" value="<%= noMatch.recipe_id %>">
+                        <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
+                        <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
+                    </form>
+                <% } else if(alreadyBookmarked){ %>
+                    <form action="/removebookmarkedapi" method="POST">
+                        <button class="btn btn-danger ">
+                            Remove Bookmark
+                        </button>
+                        <input type="text" hidden name="title" value="<%= noMatch.title %>">
+                        <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
+                        <input type="text" hidden name="publisher_url" value="<%= noMatch.publisher_url %>">
+                        <input type="text" hidden name="recipe_id" value="<%= noMatch.recipe_id %>">
+                        <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
+                        <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
+                    </form>
+               <% }}    else { %>
+                <form action="/bookmarkedapi" method="POST">
+                    <button class="btn btn-danger ">
+                        Bookmark
+                    </button>
+                    <input type="text" hidden name="title" value="<%= noMatch.title %>">
+                    <input type="text" hidden name="source_url" value="<%= noMatch.source_url %>">
+                    <input type="text" hidden name="publisher_url" value="<%= noMatch.publisher_url %>">
+                    <input type="text" hidden name="recipe_id" value="<%= noMatch.recipe_id %>">
+                    <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
+                    <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
+                </form>
+                <% } %>
+
             <br>
             <h5>Recipe Bookmarked by:-</h5>
             <ul>

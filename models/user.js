@@ -8,7 +8,7 @@ var UserSchema = new mongoose.Schema({
     type: String,
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    username: String,
+    username: { type: String, unique: true, required: true },
     password: String,
     recipesBookmarked: [
         {

@@ -55,7 +55,7 @@ router.get("/", function (req, res) {
 });
 
 router.get("/search", function (req, res) {
-    url = "https://www.food2fork.com/api/search?key=54c126fd623171f79bedaf70c4046187&q=" + req.query.recipe;
+    url = "https://www.food2fork.com/api/search?key=d088c14b6ef55995aebe59e55e37e5cf&q=" + req.query.recipe;
     request({ url, json: true }, function (err, reso, json) {
         if (err) {
             throw err;
@@ -66,14 +66,21 @@ router.get("/search", function (req, res) {
 });
 
 router.get("/details", function (req, res) {
-    url = "https://www.food2fork.com/api/get?key=54c126fd623171f79bedaf70c4046187&rId=" + req.query.recipe_id;
+    url = "https://www.food2fork.com/api/get?key=d088c14b6ef55995aebe59e55e37e5cf&rId=" + req.query.recipe_id;
     request({ url, json: true }, function (err, reso, json) {
         if (err) {
             throw err;
         } else {
+            let alreadyBookmarked = false
             noMatch = json['recipe'];
             User.find({ recipesBookmarkedapi: { $elemMatch: { recipe_id: req.query.recipe_id } } }, function (err, users) {
-                res.render("details", { noMatch: noMatch, users: users })
+                if(req.user){
+                users.forEach(function(user){ 
+                    if(user.username == req.user.username){
+                        alreadyBookmarked = true
+                    }
+                })}
+                res.render("details", { noMatch: noMatch, users: users, alreadyBookmarked: alreadyBookmarked })
             })
 
         }
@@ -173,6 +180,28 @@ router.post("/bookmarked", isLoggedIn, function (req, res) {
     });
 });
 
+// Remove bookmark internal
+router.post("/removebookmarked", isLoggedIn, function (req, res) {
+    Recipe.findById(req.body.idofrecipe, function (err, recipe) {
+        if (err) {
+            console.log(err);
+            res.redirect("/recipes");
+        } else {
+            User.find(req.user._id, function (err, user) {
+                var newuser = user[0];
+                newuser.recipesBookmarked.remove(recipe);
+                newuser.save();
+                recipe.bookmarkedBy.remove(newuser)
+                recipe.save();
+                req.flash("success", "Successfully removed bookmark!");
+                res.redirect("/recipes/" + recipe._id);
+
+            });
+        }
+
+    });
+});
+
 //New bookmark, POST
 router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
     User.find(req.user._id, function (err, user) {
@@ -182,6 +211,15 @@ router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
         req.flash("success", "Successfully added bookmark!");
         res.redirect("/recipes");
     });
+});
+
+
+//remove bookmark from api recipes
+router.post("/removebookmarkedapi", isLoggedIn, function (req, res) {
+    User.update({_id : req.user._id},{$pull : {recipesBookmarkedapi: {recipe_id: req.body.recipe_id}}},function(){
+        req.flash("success", "Successfully removed bookmark!");
+        res.redirect("/recipes");  
+    })
 });
 
 function isLoggedIn(req, res, next) {
