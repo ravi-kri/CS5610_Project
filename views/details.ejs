@@ -16,6 +16,18 @@
                 <input type="text" hidden name="image_url" value="<%= noMatch.image_url %>">
                 <input type="text" hidden name="publisher" value="<%= noMatch.publisher %>">
             </form>
+            <br>
+            <h5>Recipe Bookmarked by:-</h5>
+            <ul>
+                    <% users.forEach(function(user){ %>
+                    <li>
+                        <h4>
+                            <a href="/profile/<%= user._id %>"><%= user.username %></a>
+    
+                        </h4>
+                    </li>
+                    <% }); %>
+                </ul>
         </div>
         <div class="col-10 mx-auto col-md-6 my-3">
 
@@ -37,8 +49,8 @@
             </ul>
             <br>
             <a class="btn btn-primary" target="_blank" href=" <%= noMatch.source_url %>"> View Source </a>
-            <br><br>
-            <h5>Recipe Bookmarked by:-</h5>
+    
+           
         </div>
     </div>
 </div>

@@ -59,7 +59,7 @@ router.get("/search", function (req, res) {
     request({ url, json: true }, function (err, reso, json) {
         if (err) {
             throw err;
-        }
+        } else { }
         noMatch = json['recipes'];
         res.render("search", { noMatch: noMatch })
     });
@@ -70,9 +70,15 @@ router.get("/details", function (req, res) {
     request({ url, json: true }, function (err, reso, json) {
         if (err) {
             throw err;
+        } else {
+            noMatch = json['recipe'];
+            User.find({ recipesBookmarkedapi: { $elemMatch: { recipe_id: req.query.recipe_id } } }, function (err, users) {
+                res.render("details", { noMatch: noMatch, users: users })
+            })
+
         }
-        noMatch = json['recipe'];
-        res.render("details", { noMatch: noMatch })
+
+
     });
 });
 
