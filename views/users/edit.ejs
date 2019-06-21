@@ -4,7 +4,7 @@
     <div class="row">
 
         <div style="width:30%; margin: 30px auto;">
-            <h1 class="h3 mb-3 font-weight-normal">Edit your Profile</h1>
+            <h1 class="h3 mb-3 font-weight-normal"><i class="fa fa-edit"></i> Edit your Profile</h1>
             <form action="/profile/<%= user._id %>?_method=PUT" method="POST">
                 <div class="form-group">
                     <input class="form-control" type="text" name="user[firstName]" value="<%= user.firstName %>">
