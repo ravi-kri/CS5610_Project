@@ -57,6 +57,11 @@
                     </li>
                 <% }); %>
             </ul>
+            <br>
+            <h4><u>Instructions</u>:</h4>
+            <%= noMatch.instructions %>
+            <br>
+            <a class="btn btn-primary" target="_blank" href=" <%= noMatch.sourceUrl %>"> View Source </a>
         </div>
         <div class="col-10 mx-auto col-md-6 my-3">
 
@@ -68,10 +73,16 @@
 
             </h3>
             <br>
-            <h4><u>Instructions</u>:</h4>
-            <%= noMatch.instructions %>
-            <br>
-            <a class="btn btn-primary" target="_blank" href=" <%= noMatch.sourceUrl %>"> View Source </a>
+            <ul class="list-group mt-4">
+                    <h2 class="mt-3 mb-4">Ingredients</h2>
+                    <% noMatch.extendedIngredients.forEach(function(item){ %>
+                    <li class="list-group-item text-styling">
+                        <%= item.name %>
+                    </li>
+                    <% }) %>
+                </ul>
+            
+            
 
 
         </div>

@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
                     console.log(err);
                 } else {
                     if (allRecipes.length < 1) {
-                        noMatch = "No recipes found, please try again.";
+                        noMatchnp = "No recipes found, please try again.";
                     }
                     res.render("recipes/index", {recipes: allRecipes, page: "recipes", noMatch: noMatch});
                 }
@@ -55,7 +55,7 @@ router.get("/", function (req, res) {
 });
 
 router.get("/search", function (req, res) {
-    unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&query="+req.query.recipe)
+    unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=15&query="+req.query.recipe)
     .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
     .header("X-RapidAPI-Key", "b4d97a8bb1mshbe90d6a8faf4b5ap1fe04ejsn17284ce917f9")
     .end(function (result) {
