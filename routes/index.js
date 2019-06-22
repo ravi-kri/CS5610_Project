@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require("passport");
 var Recipe = require("../models/recipe");
 var User = require("../models/user");
-var request = require('request');
+var unirest = require('unirest');
 
 router.get("/", function (req, res) {
     let noMatch = null;
@@ -55,40 +55,33 @@ router.get("/", function (req, res) {
 });
 
 router.get("/search", function (req, res) {
-    url = "https://www.food2fork.com/api/search?key=d088c14b6ef55995aebe59e55e37e5cf&q=" + req.query.recipe;
-    request({url, json: true}, function (err, reso, json) {
-        if (err) {
-            throw err;
-        } else {
-        }
-        noMatch = json['recipes'];
-        res.render("search", {noMatch: noMatch})
+    unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?number=5&query="+req.query.recipe)
+    .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+    .header("X-RapidAPI-Key", "b4d97a8bb1mshbe90d6a8faf4b5ap1fe04ejsn17284ce917f9")
+    .end(function (result) {
+        res.render("search", {noMatch: result.body['results']})
     });
+
 });
 
 router.get("/details", function (req, res) {
-    url = "https://www.food2fork.com/api/get?key=d088c14b6ef55995aebe59e55e37e5cf&rId=" + req.query.recipe_id;
-    request({url, json: true}, function (err, reso, json) {
-        if (err) {
-            throw err;
-        } else {
-            let alreadyBookmarked = false
-            noMatch = json['recipe'];
-            User.find({recipesBookmarkedapi: {$elemMatch: {recipe_id: req.query.recipe_id}}}, function (err, users) {
-                if (req.user) {
-                    users.forEach(function (user) {
-                        if (user.username == req.user.username) {
-                            alreadyBookmarked = true
-                        }
-                    })
-                }
-                res.render("details", {noMatch: noMatch, users: users, alreadyBookmarked: alreadyBookmarked})
-            })
 
-        }
-
-
-    });
+    unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/"+req.query.recipe_id+"/information")
+.header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+.header("X-RapidAPI-Key", "b4d97a8bb1mshbe90d6a8faf4b5ap1fe04ejsn17284ce917f9")
+.end(function (result) {
+  let alreadyBookmarked = false
+  User.find({recipesBookmarkedapi: {$elemMatch: {recipe_id: req.query.recipe_id}}}, function (err, users) {
+      if (req.user) {
+          users.forEach(function (user) {
+              if (user.username == req.user.username) {
+                  alreadyBookmarked = true
+              }
+          })
+      }
+      res.render("details", {noMatch: result.body, users: users, alreadyBookmarked: alreadyBookmarked})
+  })
+});
 });
 
 // Login, GET & POST
