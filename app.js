@@ -17,6 +17,7 @@ var recipeRoutes = require("./routes/recipe"),
     indexRoutes = require("./routes/index"),
     userProfileRoute = require("./routes/profile");
 
+var port = process.env.PORT;
 
 app.use(flash());
 //Passport Config
@@ -50,6 +51,6 @@ app.use(indexRoutes);
 app.use("/recipes", recipeRoutes);
 app.use("/profile/", userProfileRoute);
 
-app.listen(3000, function () {
+app.listen(port, function () {
     console.log("Server started!");
 });
