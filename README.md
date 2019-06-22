@@ -1,4 +1,4 @@
-# CS5610_Project - Refcipe Center
+# CS5610_Project - Recipe Center
 
 Here is the application URL on Heroku : https://cs5610finalproject.herokuapp.com/
 
