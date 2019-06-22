@@ -17,7 +17,7 @@ var recipeRoutes = require("./routes/recipe"),
     indexRoutes = require("./routes/index"),
     userProfileRoute = require("./routes/profile");
 
-var port = process.env.PORT;
+var port = process.env.PORT || 3000;
 
 app.use(flash());
 //Passport Config
