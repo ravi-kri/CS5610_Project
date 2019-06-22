@@ -51,8 +51,14 @@
                 <% users.forEach(function(user){ %>
                     <li>
                         <h4>
-                            <a href="/profile/<%= user._id %>"><%= user.username %></a>
-
+                            <%   if(currentUser){ %>
+                                <%    if(user.username == currentUser.username){ %>
+                                        <a href="/profile"><%= user.username %> </a>
+                              <%      } else { %>
+                                <a href="/profile/<%= user._id %>"><%= user.username %> </a>
+                           <%   }} else {   %>
+                            <a href="/profile/<%= user._id %>"><%= user.username %> </a>
+                             <%   }    %>
                         </h4>
                     </li>
                 <% }); %>
