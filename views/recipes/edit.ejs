@@ -6,19 +6,22 @@
             <h1 class="h3 mb-3 font-weight-normal"><i class="fa fa-edit"></i> Edit your Recipe</h1>
             <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input class="form-control" required type="text" name="recipe[name]" value="<%= recipe.name %>">
+                    <label for ="nameoftherecipe"></label>
+                    <input class="form-control" id="nameoftherecipe" required type="text" name="recipe[name]" value="<%= recipe.name %>">
                 </div>
                 <div class="form-group">
                     <label for="image">Image</label>
                     <input type="file" id="image" required name="image" accept="image/*">
                 </div>
                 <div class="form-group">
-                    <textarea style="width: 100%" name="recipe[ingredients]" required
+                    <label for="ingredients"></label>
+                    <textarea style="width: 100%" id="ingredients" name="recipe[ingredients]" required
                     ><%= recipe.ingredients %>
 					</textarea>
                 </div>
                 <div class="form-group">
-                    <textarea style="width: 100%" name="recipe[description]" required
+                    <label for="description"></label>
+                    <textarea style="width: 100%" id="description" name="recipe[description]" required
                     ><%= recipe.description %>
                     </textarea>
                 </div>

@@ -7,7 +7,8 @@
             <form action="/recipes" method="POST" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 font-weight-normal">Add a new Recipe</h1>
                 <div class="form-group">
-                    <input class="form-control" type="text" required name="recipe[name]"
+                    <label for="nameoftherecipe"></label>
+                    <input class="form-control" type="text" id="nameoftherecipe" required name="recipe[name]"
                            placeholder="Name of your recipe">
                 </div>
                 <div class="form-group">
@@ -15,11 +16,13 @@
                     <input type="file" id="image" name="image" required accept="image/*" required>
                 </div>
                 <div class="form-group">
-                    <textarea style="width: 100%" name="recipe[ingredients]" required
+                    <label for="ingredients"></label>
+                    <textarea style="width: 100%" id="ingredients" name="recipe[ingredients]" required
                         placeholder="Please type in the ingredients by separating them by comma"></textarea>
                 </div>
                 <div class="form-group">
-                    <textarea style="width: 100%" name="recipe[description]" required
+                    <label for="description"></label>
+                    <textarea style="width: 100%" id="description" name="recipe[description]" required
                         placeholder="Describe your recipe"></textarea>
                 </div>
                 <div class="form-group">

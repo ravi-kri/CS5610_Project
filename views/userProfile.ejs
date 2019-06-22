@@ -6,8 +6,7 @@
     <div class="row">
         <div id="accountdetails" class="col-md-12">
             <h4><u>YOUR ACCOUNT DETAILS</u>:</h4>
-            <h5 class=""> First Name : <span id=""><%= currentUser.firstName %></span> |
-                Last Name : <span id=""><%= currentUser.lastName %></span> |
+            <h5 class=""> Name : <span id=""><%= currentUser.firstName %> <%= currentUser.lastName %></span> |
                 Email : <span id=""><%= currentUser.email %></span> |
                 Username : <span id=""><%= currentUser.username %></span>
                 <a href="/profile/<%= currentUser.id %>/edit" class="btn btn-warning"><i class="fa fa-edit"></i> Edit
