@@ -33,7 +33,7 @@ router.get("/", isLoggedIn, function (req, res) {
                                     if (err) {
                                         return console.log(err);
                                     } else {
-                                        res.render("userProfile", {
+                                        res.render("users/userProfile", {
                                             recipes: userRecipes, user: foundUser,
                                             bookmarkedRecipesapiarray: foundUser.recipesBookmarkedapi,
                                             bookmarkedRecipesforSending: bookmarkedRecipesforSending,
@@ -69,7 +69,7 @@ router.get("/:id", function (req, res) {
                                 return console.log(err);
                             } else {
                                
-                                res.render("otherprofile", {
+                                res.render("users/otherprofile", {
                                     foundUser: foundUser, userRecipes: userRecipes,
                                     bookmarkedRecipesapiarray: foundUser.recipesBookmarkedapi,
                                     bookmarkedRecipesforSending: bookmarkedRecipesforSending

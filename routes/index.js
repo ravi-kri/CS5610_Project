@@ -59,7 +59,7 @@ router.get("/search", function (req, res) {
     .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
     .header("X-RapidAPI-Key", "b4d97a8bb1mshbe90d6a8faf4b5ap1fe04ejsn17284ce917f9")
     .end(function (result) {
-        res.render("search", {noMatch: result.body['results']})
+        res.render("api/search", {noMatch: result.body['results']})
     });
 
 });
@@ -79,21 +79,15 @@ router.get("/details", function (req, res) {
               }
           })
       }
-      res.render("details", {noMatch: result.body, users: users, alreadyBookmarked: alreadyBookmarked})
+      res.render("api/details", {noMatch: result.body, users: users, alreadyBookmarked: alreadyBookmarked})
   })
 });
 });
 
 // Login, GET & POST
 router.get("/login", function (req, res) {
-    res.render("login");
+    res.render("users/login");
 });
-
-// // Login, GET & POST
-// router.get("/search", function (req, res) {
-//     res.render("search")
-// });
-
 
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user) => {
@@ -119,7 +113,7 @@ router.post("/login", (req, res, next) => {
 
 //Register
 router.get("/register", function (req, res) {
-    res.render("register");
+    res.render("users/register");
 });
 
 router.post("/register", function (req, res) {
@@ -137,7 +131,7 @@ router.post("/register", function (req, res) {
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
             req.flash("error", err.message);
-            return res.render("register");
+            return res.render("users/register");
         }
         passport.authenticate("local")(req, res, function () {
             req.flash("success", "Welcome to Recipe Center " + user.username);
