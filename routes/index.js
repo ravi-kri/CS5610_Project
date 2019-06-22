@@ -204,7 +204,7 @@ router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
         newuser.recipesBookmarkedapi.push(req.body);
         newuser.save();
         req.flash("success", "Successfully added bookmark!");
-        res.redirect("/recipes");
+        res.redirect("/details?recipe_id="+req.body.recipe_id);
     });
 });
 
@@ -213,7 +213,7 @@ router.post("/bookmarkedapi", isLoggedIn, function (req, res) {
 router.post("/removebookmarkedapi", isLoggedIn, function (req, res) {
     User.update({_id: req.user._id}, {$pull: {recipesBookmarkedapi: {recipe_id: req.body.recipe_id}}}, function () {
         req.flash("success", "Successfully removed bookmark!");
-        res.redirect("/recipes");
+        res.redirect("/details?recipe_id="+req.body.recipe_id);
     })
 });
 
