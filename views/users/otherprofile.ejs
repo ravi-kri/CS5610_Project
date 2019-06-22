@@ -3,13 +3,6 @@
 
 <div class="container">
     <div class="row">
-            <div id="accountdetails" class="col-md-12">
-                    <h4><u>ACCOUNT DETAILS</u>:</h4>
-                    <h5 class=""> First Name : <span id=""><%= foundUser.firstName %></span> | 
-                                Last Name : <span id=""><%= foundUser.lastName %></span> | 
-                   Username : <span id=""><%= foundUser.username %></span>
-                </h5>
-                </div>
         <% if(foundUser.type == "chef") { %>
         <div class="col-md-12">
                 <h4><u>Recipes added by <%= foundUser.firstName %></u>:</h4>
